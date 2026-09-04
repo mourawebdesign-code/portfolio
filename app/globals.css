@@ -1,0 +1,345 @@
+/* ==========================================================================
+   Fonte — Urbanist self-hosted (variable, cobre 400–800 em um arquivo).
+   Servida localmente em vez de via next/font/google: em redes com inspeção
+   TLS corporativa o fetch de build-time do Google Fonts falha com
+   UNABLE_TO_VERIFY_LEAF_SIGNATURE, o que trava a primeira compilação.
+   ========================================================================== */
+
+@font-face {
+  font-family: "Urbanist";
+  src: url("/fonts/urbanist-latin-variable.woff2") format("woff2-variations"),
+    url("/fonts/urbanist-latin-variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191,
+    U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Urbanist";
+  src: url("/fonts/urbanist-latin-ext-variable.woff2") format("woff2-variations"),
+    url("/fonts/urbanist-latin-ext-variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7,
+    U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F,
+    U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F,
+    U+A720-A7FF;
+}
+
+/* ==========================================================================
+   Design tokens — derivados de /reference/handyx-analysis.md
+   Todos os valores desktop foram medidos no viewport 1440 (clientWidth 1425)
+   e todos os valores mobile no viewport 390. As interpolações usam clamp()
+   ancorado exatamente nesses dois pontos.
+   ========================================================================== */
+
+:root {
+  /* ---- Cor ---- */
+  --background: #ffffff;
+  --surface-soft: #fff8f3;   /* seções alternadas (área grande) */
+  --accent-soft: #fff1e6;    /* elementos pequenos: badges, pills, ícones */
+  --surface-muted: #f4f4f4;  /* item do accordion */
+  --foreground: #000000;
+  --muted: #444444;
+  --accent: #ff6b00;
+  --accent-hover: #e85f00;
+  --accent-tint: rgba(255, 107, 0, 0.2);
+  --on-accent: #ffffff;
+  --footer-bg: #000000;
+  --footer-fg: #ffffff;
+  --footer-muted: rgba(255, 255, 255, 0.62);
+  --hairline: rgba(255, 255, 255, 0.14);
+
+  /* ---- Layout ---- */
+  --container: 1300px;
+  --page-padding: 20px;
+
+  /* Espaçamento vertical de seção: 100px @1440 → 50px @390 */
+  --section-space: clamp(50px, 31.43px + 4.762vw, 100px);
+
+  /* Gaps estruturais recorrentes na referência */
+  --gap-col: 80px;      /* About / FAQ / Service Areas */
+  --gap-grid: 20px;     /* grids e carrosséis */
+  --gap-stack: 20px;    /* pilhas de conteúdo */
+  --gap-head: 60px;     /* cabeçalho de seção → conteúdo */
+
+  /* ---- Raio ---- */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+
+  /* ---- Tipografia ---- */
+  --font-display: "Urbanist", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
+  --font-body: var(--font-display);
+
+  /* Escala ancorada nas medições (mobile @390 → desktop @1440) */
+  /* A referencia nao interpola o h1: ela troca em degraus nos breakpoints
+     1340 / 810 (medido: 72/79.2, 58/63.8, 40/48). Ver .h1 abaixo. */
+  --fs-h1: 40px;
+  --lh-h1: 48px;
+  /* Como o h1, o h2 troca em degraus nos breakpoints 1340 / 810 em vez de
+     interpolar: 51/61.2 · 41/49.2 · 30/36 (medido). Ver .h2 abaixo. */
+  --fs-h2: 30px;
+  --lh-h2: 36px;
+  /* h3 (titulo do rodape) — 42/50.4 no desktop, em degraus como os demais */
+  --fs-h3: 30px;
+  --lh-h3: 36px;
+  /* h4 (titulo do post em destaque) — degraus, como h1/h2/card-title */
+  --fs-h4: 22px;
+  --lh-h4: 26.4px;
+  /* Titulo de card de servico — degraus medidos: 28/33.6 · 22/26.4 · 18/21.6 */
+  --fs-card-title: 18px;
+  --lh-card-title: 21.6px;
+  --fs-lead: clamp(20px, 19.26px + 0.19vw, 22px);
+  --fs-faq: 19px;
+  --fs-body: 18px;
+  --fs-body-sm: 16px;
+  --fs-input: 14px;
+  --fs-eyebrow: 12px;
+  /* métrica medida na referência: 34px / 41px, peso 700, cor accent.
+     A referência NÃO reduz esse valor no mobile (o bloco mede 62px em
+     todos os breakpoints: 41 do número + 3 de gap + 18 do label). */
+  --fs-metric: 34px;
+
+  --lh-tight: 1.1;    /* h1 → 72 / 79.2 */
+  --lh-heading: 1.2;  /* h2 → 51 / 61.2 */
+  --lh-faq: 1.3;
+  --lh-body: 1.5;     /* 18 / 27 */
+  --lh-body-sm: 1.4;  /* 16 / 22.4 */
+
+  /* ---- Motion ---- */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 0.18s;
+  --dur: 0.4s;
+  --dur-slow: 0.7s;
+}
+
+/* ==========================================================================
+   Reset enxuto
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* compensa a navbar fixa ao navegar por âncora */
+  scroll-padding-top: 84px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  font-size: var(--fs-body-sm);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* nenhuma seção pode gerar scroll horizontal */
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ==========================================================================
+   Primitivos de layout
+   ========================================================================== */
+
+/* Na referência o padding de 20px pertence à <section> e o container de 1300px
+   fica dentro dele — ou seja, 1300 é a largura do CONTEÚDO, não da caixa.
+   Somar o padding ao max-width reproduz isso com um único elemento: o
+   conteúdo mede 1300px em telas largas (x=63 em 1425) e encolhe para
+   viewport − 40px nas estreitas. */
+.container {
+  width: 100%;
+  max-width: calc(var(--container) + 2 * var(--page-padding));
+  margin-inline: auto;
+  padding-inline: var(--page-padding);
+}
+
+.section {
+  padding-block: var(--section-space);
+}
+
+.section--soft {
+  background: var(--surface-soft);
+}
+
+/* ==========================================================================
+   Papéis tipográficos
+   ========================================================================== */
+
+.h1 {
+  font-size: var(--fs-h1);
+  line-height: var(--lh-h1);
+  font-weight: 700;
+  letter-spacing: normal;
+  color: var(--foreground);
+}
+
+/* Degraus medidos na referencia: 40/48 (<=809), 58/63.8 (810-1339),
+   72/79.2 (>=1340). */
+@media (min-width: 810px) {
+  :root {
+    --fs-h1: 58px;
+    --lh-h1: 63.8px;
+    --fs-h2: 41px;
+    --lh-h2: 49.2px;
+    --fs-card-title: 22px;
+    --lh-card-title: 26.4px;
+    --fs-h4: 27px;
+    --lh-h4: 32.4px;
+    --fs-h3: 36px;
+    --lh-h3: 43.2px;
+  }
+}
+
+@media (min-width: 1340px) {
+  :root {
+    /* 62px (em vez de 72px) é o necessário para "Your trusted electrician"
+       caber em uma linha dentro dos 650px da coluna de texto da hero, e
+       assim quebrar em exatamente 2 linhas ("...electrician" / "for every
+       job.") em vez de 3. O h1 é usado só na hero (nenhum outro heading usa
+       .h1), então o ajuste fica contido ali. */
+    --fs-h1: 62px;
+    --lh-h1: 68.2px;
+    --fs-h2: 51px;
+    --lh-h2: 61.2px;
+    --fs-card-title: 28px;
+    --lh-card-title: 33.6px;
+    --fs-h4: 34px;
+    --lh-h4: 40.8px;
+    --fs-h3: 42px;
+    --lh-h3: 50.4px;
+  }
+}
+
+.h2 {
+  font-size: var(--fs-h2);
+  line-height: var(--lh-h2);
+  font-weight: 700;
+  letter-spacing: normal;
+  color: var(--foreground);
+}
+
+.h3 {
+  font-size: var(--fs-h3);
+  line-height: var(--lh-heading);
+  font-weight: 700;
+}
+
+.h4 {
+  font-size: var(--fs-h4);
+  line-height: var(--lh-heading);
+  font-weight: 700;
+}
+
+.eyebrow {
+  font-size: var(--fs-eyebrow);
+  line-height: var(--lh-body);
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.body {
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.bodySm {
+  font-size: var(--fs-body-sm);
+  line-height: var(--lh-body-sm);
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.accent {
+  color: var(--accent);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

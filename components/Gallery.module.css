@@ -1,0 +1,212 @@
+/* Projects — grid editorial assimétrico (substitui a antiga faixa horizontal
+   de imagens). Mesmas 5 fotos, apenas reorganizadas: uma célula grande +
+   duas médias empilhadas ao lado, e duas células na linha de baixo. */
+
+.gallery {
+  padding-block: 100px;
+  background: var(--surface-soft);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+}
+
+/* ---- Cabecalho ---- */
+
+.head {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  width: 100%;
+}
+
+.headLeft {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.headRight {
+  flex: 0 0 520px;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.headline {
+  width: 100%;
+}
+
+.headParagraph {
+  font-size: var(--fs-body-sm);
+  line-height: var(--lh-body-sm);
+  font-weight: 600;
+  color: var(--muted);
+}
+
+/* ---- Grid ---- */
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.gridTop {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  grid-template-rows: repeat(2, 1fr);
+  gap: 20px;
+  height: 640px;
+}
+
+.cellBig {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
+
+.cellA {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.cellB {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.gridBottom {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  height: 320px;
+}
+
+/* Cada celula: recorte com radius, overflow escondido para o hover de escala
+   e o degrade/legenda ancorados embaixo. */
+.cell {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+}
+
+.shot {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.5s var(--ease);
+}
+
+.cell:hover .shot {
+  transform: scale(1.03);
+}
+
+/* Legenda discreta: degrade preto sutil apenas para garantir legibilidade,
+   sem caixa nem fundo solido. */
+.caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 40px 20px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0));
+  pointer-events: none;
+}
+
+.category {
+  font-size: 13px;
+  line-height: 1.3;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.location {
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* ==========================================================================
+   Tablet / mobile
+   ========================================================================== */
+
+@media (max-width: 1339px) {
+  .gallery {
+    padding-block: 50px;
+  }
+
+  .inner {
+    gap: 40px;
+  }
+
+  .head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .headLeft,
+  .headRight {
+    flex: initial;
+    max-width: none;
+    width: 100%;
+  }
+
+  .gridTop {
+    height: 520px;
+  }
+
+  .gridBottom {
+    height: 260px;
+  }
+}
+
+/* Mobile: abandona o grid assimetrico por uma pilha vertical que alterna
+   alturas (maior / horizontal / maior / horizontal / maior). */
+@media (max-width: 809px) {
+  .grid {
+    gap: 16px;
+  }
+
+  .gridTop,
+  .gridBottom {
+    display: contents;
+  }
+
+  .cell {
+    width: 100%;
+    border-radius: var(--radius-sm);
+  }
+
+  .cellBig,
+  .cellB,
+  .cellD {
+    height: 380px;
+  }
+
+  .cellA,
+  .cellC {
+    height: 240px;
+  }
+}

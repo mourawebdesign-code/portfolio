@@ -1,0 +1,295 @@
+/* Blog — todos os valores medidos em https://handyx.framer.website/ @1440.
+
+   bloco      top 3879 · 1077 de altura · fundo branco · padding 100px 20px
+   inner      1300x877 · column · gap 60
+   cabecalho  1300x160 · row · space-between · align-items flex-end
+   corpo      1300x657 · row · gap 20 · align-items center
+              destaque 650 · lista 630
+
+   Conferencia: 100 + 160 + 60 + 657 + 100 = 1077.
+   A altura do corpo vem da LISTA (3 x 205.6 + 2 x 20 = 657), entao o card em
+   destaque pode variar de altura sem mexer no ritmo vertical da pagina. */
+
+.blog {
+  padding-block: 100px;
+  background: var(--background);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
+}
+
+/* ---- Cabecalho (mesmo padrao da Gallery: space-between + flex-end) ---- */
+
+.head {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  width: 100%;
+}
+
+.headLeft {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.headRight {
+  flex: 0 0 520px;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.headline {
+  width: 100%;
+}
+
+.headParagraph {
+  font-size: var(--fs-body-sm);
+  line-height: var(--lh-body-sm);
+  font-weight: 600;
+  color: var(--muted);
+}
+
+/* ---- Corpo ---- */
+
+.body {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+/* 650 + 20 + 630 = 1300 */
+.featured {
+  flex: 0 0 650px;
+  max-width: 650px;
+  min-width: 0;
+}
+
+.featuredCard {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border-radius: var(--radius-sm);
+}
+
+/* O wrapper clipa o hover de escala da imagem sem afetar o texto abaixo. */
+.featuredImageClip {
+  display: block;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+}
+
+.featuredImage {
+  display: block;
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  transition: transform 0.5s var(--ease);
+}
+
+.featuredCard:hover .featuredImage {
+  transform: scale(1.02);
+}
+
+.featuredText {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Data do destaque: 16/22.4 peso 600 no accent (a do item da lista e 12/18) */
+.featuredDate {
+  font-size: var(--fs-body-sm);
+  line-height: var(--lh-body-sm);
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.featuredTitle {
+  font-size: var(--fs-h4);
+  line-height: var(--lh-h4);
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.featuredExcerpt {
+  font-size: var(--fs-body-sm);
+  line-height: var(--lh-body-sm);
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.readMoreLg {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  font-size: var(--fs-body-sm);
+  line-height: var(--lh-body-sm);
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.readMoreLg svg {
+  width: 16px;
+  height: 16px;
+  color: var(--accent);
+  transition: transform var(--dur) var(--ease);
+}
+
+.readMoreLg:hover svg {
+  transform: translate(3px, -3px);
+}
+
+/* ---- Lista de 3 ---- */
+
+.list {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.post {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+}
+
+/* Medido: a imagem e arredondada SO do lado esquerdo. */
+.postImage {
+  flex: none;
+  display: block;
+  width: 200px;
+  height: auto;
+  align-self: stretch;
+  object-fit: cover;
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  transition: transform 0.5s var(--ease);
+}
+
+.post:hover .postImage {
+  transform: scale(1.02);
+}
+
+/* Medido: padding 24 e gap 8 (18 + 8 + 53 + 8 + 45 + 8 + 18 + 48 = 206) */
+.postText {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  padding: 24px;
+}
+
+.postDate {
+  font-size: var(--fs-eyebrow);
+  line-height: 18px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* Medido: 22/26.4 fixos — NAO e o token do card de servico (28/33.6 no
+   desktop). Usar o token aqui deixava cada item 14.4px mais alto e a secao
+   inteira 43px fora. */
+.postTitle {
+  font-size: 22px;
+  line-height: 26.4px;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.postExcerpt {
+  font-size: var(--fs-body-sm);
+  line-height: var(--lh-body-sm);
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.readMoreSm {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fs-eyebrow);
+  line-height: 18px;
+  font-weight: 700;
+  color: var(--foreground);
+  transition: color var(--dur-fast) var(--ease);
+}
+
+.readMoreSm svg {
+  width: 13px;
+  height: 13px;
+  color: var(--accent);
+  transition: transform var(--dur) var(--ease);
+}
+
+.readMoreSm:hover {
+  color: var(--accent);
+}
+
+.readMoreSm:hover svg {
+  transform: translate(3px, -3px);
+}
+
+/* ==========================================================================
+   Tablet / mobile
+   ========================================================================== */
+
+@media (max-width: 1339px) {
+  .blog {
+    padding-block: 50px;
+  }
+
+  .inner {
+    gap: 40px;
+  }
+
+  .head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .headLeft,
+  .headRight {
+    flex: initial;
+    max-width: none;
+    width: 100%;
+  }
+
+  .body {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+  }
+
+  .featured,
+  .list {
+    flex: initial;
+    max-width: none;
+    width: 100%;
+  }
+}
+
+/* Medido: a imagem do destaque mantem 400px de altura em TODOS os breakpoints,
+   e o item da lista NAO empilha no mobile — segue em linha com a imagem de
+   200px, o que deixa so ~102px para o texto. Reproduzido por fidelidade; assim
+   como os campos do formulario, vale revisar quando virar site de cliente. */

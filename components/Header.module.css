@@ -1,0 +1,165 @@
+/* Navbar — medida: altura 67px, padding 10px 20px, fundo branco,
+   container 1300px, bloco direito com gap 40px, links com gap 40px,
+   CTA 193x47 radius 6px. */
+
+.header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 60;
+  background: var(--background);
+  padding-block: 10px;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 47px;
+}
+
+.logo {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+}
+
+.logoImage {
+  display: block;
+  height: 42px;
+  width: auto;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.navList {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 40px;
+}
+
+/* Medido na referencia: 18px / 27px / peso 700, preto.
+   "About" mede 50px, "Services" 69px, "News" 44px, "FAQ" 34px, "Contact" 64px. */
+.navLink {
+  position: relative;
+  display: block;
+  font-size: var(--fs-body);
+  font-weight: 700;
+  line-height: 27px;
+  color: var(--foreground);
+  transition: color var(--dur-fast) var(--ease);
+}
+
+.navLink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur) var(--ease);
+}
+
+.navLink:hover {
+  color: var(--accent);
+}
+
+.navLink:hover::after {
+  transform: scaleX(1);
+}
+
+/* ---- Mobile ---- */
+
+.burger {
+  display: none;
+  width: 44px;
+  height: 44px;
+  margin-right: -10px;
+  align-items: center;
+  justify-content: center;
+  color: var(--foreground);
+}
+
+.panel {
+  position: fixed;
+  inset: 67px 0 auto 0;
+  background: var(--background);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 8px var(--page-padding) 24px;
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  pointer-events: none;
+  transition: grid-template-rows var(--dur) var(--ease),
+    opacity var(--dur) var(--ease);
+}
+
+.panelOpen {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.panelInner {
+  overflow: hidden;
+}
+
+.panelList {
+  display: flex;
+  flex-direction: column;
+}
+
+.panelLink {
+  display: block;
+  padding: 14px 0;
+  font-size: 18px;
+  font-weight: 700;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+.panelCta {
+  margin-top: 20px;
+}
+
+@media (max-width: 959px) {
+  .navList,
+  .right > a {
+    display: none;
+  }
+
+  .burger {
+    display: inline-flex;
+  }
+
+  /* A referencia mede 64px de header no mobile (47 -> 44 de altura interna).
+     O limiar foi ampliado de 809 para 959: "Volterra Electric" + "Get a Free
+     Estimate" são mais largos que o texto original e não cabem em uma linha
+     só entre 810-959px — nessa faixa o menu mobile (já existente no design)
+     evita que o CTA seja cortado pela borda da viewport. */
+  .inner {
+    height: 44px;
+  }
+
+  /* A queixa era só no desktop — no mobile a barra tem 44px de altura
+     interna, então mantém a logo no tamanho original para não apertar. */
+  .logoImage {
+    height: 34px;
+  }
+
+  .panel {
+    inset: 64px 0 auto 0;
+  }
+}
+
+@media (min-width: 960px) {
+  .panel {
+    display: none;
+  }
+}

@@ -1,0 +1,149 @@
+/* About — todos os valores medidos em https://handyx.framer.website/ @1440
+   (clientWidth 1425). Ver reference/handyx-analysis.md secao 0.
+
+   section    top 835 · 588 de altura · padding 0px 20px 100px
+   container  1300x488 · flex row · gap 80 · align-items center
+   col E      610x450 (imagem, radius 12) · col D 610x488 (gap 20)
+
+   O padding-top ZERO e o ponto central da transicao: a seçao encosta no fim da
+   hero (835) e quem cria o respiro e o fade branco dos ultimos 150px da hero
+   somado aos 53px entre a base da imagem do trabalhador (782) e o 835. */
+
+.about {
+  padding-block: 0 100px;
+  background: var(--background);
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 80px;
+}
+
+/* ---- Coluna esquerda: imagem editorial, sem badges sobrepostos ---- */
+
+.media {
+  flex: 1 0 0;
+  width: 610px;
+  min-width: 0;
+}
+
+.frame {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius-lg);
+}
+
+/* Tratamento editorial: crop mais vertical que o original (520 em vez de
+   450) para a foto ganhar presença própria, sem badges sobrepostos. */
+.image {
+  display: block;
+  width: 100%;
+  height: 520px;
+  object-fit: cover;
+  object-position: center 30%;
+  border-radius: var(--radius-lg);
+}
+
+/* ---- Coluna direita: 610x488, gap 20 ---- */
+
+.content {
+  flex: 1 0 0;
+  width: 610px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.headline {
+  width: 100%;
+}
+
+/* Medido: 16px/22.4px peso 600 na cor #444 — 4 linhas em 610px.
+   Nao e o mesmo estilo do paragrafo da hero (aquele e 18/27 peso 700 preto). */
+.paragraph {
+  width: 100%;
+  font-size: var(--fs-body-sm);
+  line-height: var(--lh-body-sm);
+  font-weight: 600;
+  color: var(--muted);
+}
+
+/* ---- Lista de beneficios: composicao editorial, sem caixas ----
+   Cada item usa um check fino em laranja e um divisor sutil embaixo; o
+   ultimo item nao tem divisor. Bastante padding vertical no lugar do
+   antigo bloco de icones em caixa azul. */
+
+.benefits {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.benefit {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 14px;
+  padding-block: 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.09);
+}
+
+.benefit:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.checkIcon {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  color: var(--accent);
+}
+
+.benefitText {
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+/* ==========================================================================
+   Tablet / mobile — mesma quebra da referencia (1340 / 810)
+   ========================================================================== */
+
+/* Medido na referencia: em 810-1339 E em <=809 a seçao usa
+   `padding: 0px 20px 50px` e o container vira `column` com `gap: 40px`.
+   Ou seja, o padding-bottom cai de 100 para 50 ja no tablet. */
+@media (max-width: 1339px) {
+  .about {
+    padding-block: 0 50px;
+  }
+
+  .row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 40px;
+  }
+
+  .media,
+  .content {
+    flex: initial;
+    width: 100%;
+  }
+}
+
+@media (max-width: 1339px) {
+  .image {
+    height: 440px;
+  }
+}
+
+@media (max-width: 809px) {
+  .image {
+    height: 320px;
+  }
+}

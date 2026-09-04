@@ -1,0 +1,233 @@
+/* Services — todos os valores medidos em https://handyx.framer.website/ @1440
+   (clientWidth 1425). Ver reference/handyx-analysis.md.
+
+   section    top 1423 · 1037 de altura · bg #F2F8FF · padding 100px 20px
+   container  1300x837 · flex column · gap 60
+   cabecalho  1300x160 · flex row · gap 10 · align-items center
+   grid       1300x617 · grid-template-columns 420px 420px 420px · gap 20
+   card       420x298 · bg #FFF · radius 6 · padding 40 · column gap 80
+
+   Conferencia da altura: 100 + 160 + 60 + 617 + 100 = 1037. */
+
+.services {
+  padding-block: 100px;
+  background: var(--surface-soft);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 60px;
+}
+
+/* ---- Cabecalho: 770 + 10 + 520 = 1300 ---- */
+
+.head {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+/* 770 de largura, gap 10: eyebrow (28) + h2 (122) = 160 */
+.headLeft {
+  flex: 1 0 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+/* 520 fixos, gap 20: paragrafo (45) + CTA (47) = 112, centrado nos 160 */
+.headRight {
+  flex: 0 0 520px;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.headline {
+  width: 100%;
+}
+
+/* Medido: 16/22.4 peso 600 na cor #444 (2 linhas em 520px) */
+.headParagraph {
+  font-size: var(--fs-body-sm);
+  line-height: var(--lh-body-sm);
+  font-weight: 600;
+  color: var(--muted);
+}
+
+/* ---- Grid 3x2 ---- */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 100%;
+}
+
+/* Item do grid — carrega a animação de entrada (Reveal). O hover/transform
+   vive no .card (div filha) para nunca competir com o transform inline que o
+   framer-motion mantém neste elemento depois da entrada. */
+.cardWrap {
+  display: flex;
+  min-width: 0;
+}
+
+/* Cartão técnico/proprietário: numeração discreta + ícone, bastante espaço
+   interno, borda muito sutil (em vez de depender só do contraste com o fundo
+   da seção) e um "Learn More" discreto ancorado embaixo. */
+.card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 40px;
+  background: var(--background);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: var(--radius-md);
+  transition: transform 0.3s var(--ease), border-color 0.3s var(--ease),
+    box-shadow 0.3s var(--ease);
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 107, 0, 0.35);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+}
+
+.cardTop {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Numeração discreta — pequena, neutra, nunca protagonista. */
+.number {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Caixa do icone: 44x44, radius refinado, com o SVG de 26x26 centrado. */
+.icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  background: var(--accent-soft);
+  border-radius: var(--radius-sm);
+  transition: background-color var(--dur) var(--ease);
+}
+
+.card:hover .icon {
+  background: var(--accent);
+}
+
+.icon img {
+  width: 26px;
+  height: 26px;
+  transition: filter var(--dur) var(--ease);
+}
+
+.card:hover .icon img {
+  filter: brightness(0) invert(1);
+}
+
+.cardText {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1 0 auto;
+}
+
+.cardTitle {
+  font-size: var(--fs-card-title);
+  line-height: var(--lh-card-title);
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+/* Medido: descricao do card e PRETA (o paragrafo do cabecalho e que e #444) */
+.cardDesc {
+  font-size: var(--fs-body-sm);
+  line-height: var(--lh-body-sm);
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+/* Link discreto — nao e um segundo CTA principal. */
+.cardLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  font-size: var(--fs-body-sm);
+  font-weight: 700;
+  color: var(--foreground);
+  transition: color var(--dur-fast) var(--ease);
+}
+
+.cardLink svg {
+  width: 16px;
+  height: 16px;
+  color: var(--accent);
+  transition: transform var(--dur) var(--ease);
+}
+
+.card:hover .cardLink {
+  color: var(--accent);
+}
+
+.card:hover .cardLink svg {
+  transform: translateX(4px);
+}
+
+/* ==========================================================================
+   Tablet / mobile — breakpoints da referencia (1340 / 810)
+   ========================================================================== */
+
+/* Medido: ja no tablet a secao cai para padding 50, o container para gap 40 e o
+   cabecalho vira coluna com gap 10 (nao 40). O grid passa a 2 colunas. */
+@media (max-width: 1339px) {
+  .services {
+    padding-block: 50px;
+  }
+
+  .inner {
+    gap: 40px;
+  }
+
+  .head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .headLeft,
+  .headRight {
+    flex: initial;
+    max-width: none;
+    width: 100%;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 809px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

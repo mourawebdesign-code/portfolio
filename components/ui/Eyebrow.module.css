@@ -1,0 +1,18 @@
+/* Eyebrow — medida na referência: caixa 28px de altura, padding 5px 20px,
+   background #F2F8FF, border-radius 20px, texto 12px/18px peso 700 preto.
+   Ex.: "About Us" mede 49px de texto -> pill de 89x28.
+   Este mesmo elemento se repete no cabeçalho de todas as seções do site. */
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  height: 28px;
+  padding: 5px 20px;
+  background: var(--accent-soft);
+  border-radius: 20px;
+  font-size: var(--fs-eyebrow);
+  line-height: var(--lh-body);
+  font-weight: 700;
+  color: var(--foreground);
+  white-space: nowrap;
+}

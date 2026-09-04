@@ -1,0 +1,96 @@
+/* Botões — medidos na referência:
+   primário 193x47, secundário 213x47, padding 12px 25px, radius 6px. */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 47px;
+  padding: 12px 25px;
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-body-sm);
+  font-weight: 600;
+  line-height: var(--lh-body-sm);
+  white-space: nowrap;
+  transition: background-color var(--dur-fast) var(--ease),
+    color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+}
+
+.btn svg {
+  width: 15px;
+  height: 15px;
+  flex: none;
+  transition: transform var(--dur) var(--ease);
+}
+
+/* Primário — azul preenchido */
+.primary {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.primary:hover {
+  background: var(--accent-hover);
+}
+
+.primary:hover svg {
+  transform: translateX(3px);
+}
+
+/* Secundário — na referência é totalmente chapado: sem fundo, sem borda.
+   Mede 213x47 com o mesmo padding do primário. */
+.secondary {
+  background: transparent;
+  color: var(--foreground);
+}
+
+.secondary:hover {
+  color: var(--accent);
+}
+
+/* Sobre fundo escuro (footer) */
+.onDark {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.onDark:hover {
+  background: var(--accent-hover);
+}
+
+/* Link textual com seta — "Learn More", "Read More", "View All Blogs" */
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: auto;
+  padding: 0;
+  border-radius: 0;
+  font-size: var(--fs-body-sm);
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.link svg {
+  width: 16px;
+  height: 16px;
+  color: var(--accent);
+}
+
+.link:hover {
+  color: var(--accent);
+}
+
+.link:hover svg {
+  transform: translate(3px, -3px);
+}
+
+.small {
+  height: 42px;
+  padding: 10px 20px;
+}
+
+.block {
+  width: 100%;
+}

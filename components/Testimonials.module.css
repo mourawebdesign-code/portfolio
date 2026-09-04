@@ -1,0 +1,210 @@
+/* Testimonials — medido em https://handyx.framer.website/ @1440.
+
+   section    top 4956 · 655 de altura · bg #F2F8FF · padding 100px 20px
+   inner      1300x455 · column · gap 60
+   cabecalho  1300x161 · row · gap 10 · align-items flex-end
+   carrossel  1300x234 · row · gap 20 · overflow clip
+   card       420x234 · bg #FFF · radius 6 · padding 20 · column gap 20
+
+   Conferencia: 100 + 161 + 60 + 234 + 100 = 655. */
+
+.testimonials {
+  padding-block: 100px;
+  background: var(--surface-soft);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
+}
+
+/* ---- Cabecalho ---- */
+
+.head {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 10px;
+  width: 100%;
+}
+
+.headLeft {
+  flex: 1 0 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.headRight {
+  flex: 0 0 520px;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.headline {
+  width: 100%;
+}
+
+.headParagraph {
+  font-size: var(--fs-body-sm);
+  line-height: var(--lh-body-sm);
+  font-weight: 600;
+  color: var(--muted);
+}
+
+/* ---- Carrossel ---- */
+
+.carousel {
+  width: 100%;
+  overflow: clip;
+}
+
+.track {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+/* Card institucional: fundo branco, borda muito sutil, linha laranja fina no
+   topo como unica assinatura de marca. Altura minima (nao fixa) para o
+   depoimento poder respirar sem quebrar o alinhamento do carrossel. */
+.card {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+  width: 420px;
+  min-height: 248px;
+  padding: 28px 24px 22px;
+  background: var(--background);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-top: 2px solid var(--accent);
+  border-radius: var(--radius-sm);
+  transition: transform var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0, 0, 0, 0.14);
+  border-top-color: var(--accent);
+}
+
+.quoteBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.stars {
+  display: flex;
+  gap: 5px;
+  color: var(--accent);
+}
+
+.stars svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Depoimento com um pouco mais de protagonismo que o corpo padrao do site. */
+.quote {
+  font-size: 19px;
+  line-height: 1.5;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+/* ---- Rodape: autor a esquerda, selo discreto de origem a direita ---- */
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.author {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  flex: none;
+  width: 42px;
+  height: 42px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.authorText {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.role {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+/* Selo "Google Review" — pequeno e secundario, nao um badge grande. */
+.source {
+  flex: none;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+
+/* ==========================================================================
+   Tablet / mobile
+   ========================================================================== */
+
+@media (max-width: 1339px) {
+  .testimonials {
+    padding-block: 50px;
+  }
+
+  .inner {
+    gap: 40px;
+  }
+
+  .head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .headLeft,
+  .headRight {
+    flex: initial;
+    max-width: none;
+    width: 100%;
+  }
+}
+
+@media (max-width: 809px) {
+  .card {
+    width: 300px;
+  }
+}

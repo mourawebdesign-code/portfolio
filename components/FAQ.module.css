@@ -1,0 +1,205 @@
+/* FAQ — medido em https://handyx.framer.website/ @1440.
+
+   section    top 5611 · 800 de altura · fundo branco · padding 100px 20px
+   inner      1300x600 · row · gap 80 · align-items flex-start
+   aside      520x600 · column · space-between (bloco 266 + card 229)
+   accordion  700x600 · column · gap 16
+
+   Conferencia: 100 + 600 + 100 = 800. */
+
+.faq {
+  padding-block: 100px;
+  background: var(--background);
+}
+
+.inner {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 80px;
+}
+
+/* ---- Aside 520 ---- */
+
+.aside {
+  flex: 0 0 520px;
+  max-width: 520px;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.asideHead {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.headline {
+  width: 100%;
+}
+
+/* Card "Still have questions?": bg #F2F8FF, radius 6, padding 32, gap 16.
+   41 (h4) + 45 (paragrafo) + 47 (CTA) + 32 de gaps + 64 de padding = 229 */
+.asideCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 32px;
+  background: var(--accent-soft);
+  border-radius: var(--radius-sm);
+}
+
+.asideTitle {
+  font-size: var(--fs-h4);
+  line-height: var(--lh-h4);
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.asideText {
+  font-size: var(--fs-body-sm);
+  line-height: var(--lh-body-sm);
+  font-weight: 600;
+  color: var(--muted);
+}
+
+/* ---- Accordion 700 ---- */
+
+.list {
+  flex: 1 0 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  padding: 26px 28px;
+  background: var(--surface-muted);
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease);
+}
+
+/* Estado aberto: tinta laranja extremamente sutil, nao um card diferente. */
+.item[data-open="true"] {
+  background: var(--accent-soft);
+  border-color: rgba(255, 107, 0, 0.18);
+}
+
+.question {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  padding: 0;
+  text-align: left;
+  font-size: var(--fs-faq);
+  line-height: 24.7px;
+  font-weight: 700;
+  color: var(--foreground);
+  transition: color var(--dur-fast) var(--ease);
+}
+
+.question:hover {
+  color: var(--accent);
+}
+
+.toggle {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  font-size: 22px;
+  line-height: 22px;
+  font-weight: 700;
+  color: var(--foreground);
+  transition: color var(--dur-fast) var(--ease),
+    transform var(--dur-fast) var(--ease);
+}
+
+.toggle[data-open="true"] {
+  color: var(--accent);
+  transform: rotate(45deg);
+}
+
+/* Acordeao animado com a tecnica grid-rows 0fr -> 1fr (mesma usada no menu
+   mobile do header), para nao depender de altura fixa/JS. */
+.answerWrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--dur) var(--ease);
+}
+
+.answerWrap[data-open="true"] {
+  grid-template-rows: 1fr;
+}
+
+.answerInner {
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity var(--dur-fast) var(--ease);
+}
+
+.answerWrap[data-open="true"] .answerInner {
+  opacity: 1;
+  transition-delay: 0.08s;
+}
+
+/* Medido: 16/24 (nao 22.4) peso 600 #444 — 2 linhas em 644px = 48 */
+.answer {
+  padding-top: 12px;
+  font-size: var(--fs-body-sm);
+  line-height: 24px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+/* ==========================================================================
+   Tablet / mobile
+   ========================================================================== */
+
+@media (max-width: 1339px) {
+  .faq {
+    padding-block: 50px;
+  }
+
+  .inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 40px;
+  }
+
+  .aside {
+    flex: initial;
+    max-width: none;
+    width: 100%;
+    min-height: 0;
+  }
+
+  .list {
+    flex: initial;
+    width: 100%;
+  }
+}
+
+@media (max-width: 809px) {
+  .item {
+    padding: 20px;
+  }
+
+  .asideCard {
+    padding: 24px;
+  }
+}

@@ -1,0 +1,41 @@
+/* Odômetro de dígitos — a referência expõe colunas 0–9 por casa decimal e
+   desliza cada coluna verticalmente ao entrar na viewport. */
+
+/* line-height 1.05: na referência o bloco de métrica mede 62px no total
+   (número + label de 18px), o que exige o número praticamente sem folga. */
+.value {
+  display: inline-flex;
+  align-items: baseline;
+  /* altura da casa decimal: 41px em todos os breakpoints (medido) */
+  --digit-h: 41px;
+  font-size: var(--fs-metric);
+  line-height: var(--digit-h);
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.digit {
+  display: inline-block;
+  height: var(--digit-h);
+  overflow: hidden;
+  vertical-align: baseline;
+}
+
+.reel {
+  display: flex;
+  flex-direction: column;
+  transform: translateY(0);
+  transition: transform 1.4s var(--ease);
+}
+
+.reel span {
+  height: var(--digit-h);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.static {
+  display: inline-block;
+}

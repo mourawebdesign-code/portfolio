@@ -1,0 +1,319 @@
+/* Hero — todos os valores medidos em https://handyx.framer.website/.
+   Breakpoints da própria referência (lidos das @media do site):
+     >= 1340px  desktop (duas colunas)
+     810–1339px tablet  (empilhado, h1 58px)
+     <= 809px   mobile  (empilhado, h1 40px, CTAs em coluna, badges ocultos)
+
+   Desktop @1440 (clientWidth 1425):
+     section 1425x835 · padding 100px 20px
+     row     1300x728 · flex row · gap 10 · align-items center
+     col E    650x535 · gap 20 · rating(55) h1(238) p(54) ctas(47) métricas(62)
+     col D    640x728
+
+   Tablet @1265: padding 117/20/50 · container em coluna, gap 10 · imagem
+   100% de largura no aspect 640:728 · hero 1932 de altura.
+   Mobile @390: idem, h1 40/48, parágrafo 16/22.4, CTAs empilhados. */
+
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: clip;
+  /* padding e altura do tablet/mobile; o desktop sobrescreve abaixo */
+  padding-block: 117px 50px;
+}
+
+/* Fundo full-bleed com as formas geométricas suaves da referência. */
+.background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.row {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  width: 100%;
+}
+
+/* ---- Rating: 192x55 · padding 5px 10px · gap 5 · bg #F2F8FF · radius 6 ---- */
+
+.rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  background: var(--accent-soft);
+  border-radius: var(--radius-sm);
+}
+
+.ratingMark {
+  width: 40px;
+  height: 40px;
+  flex: none;
+}
+
+.ratingStack {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.stars {
+  display: flex;
+  gap: 3px;
+  color: #fbbb07;
+}
+
+/* 18 (estrelas) + 5 (gap) + 22.4 (texto) = 45.4 → pill de 55 com padding 5 */
+.stars svg {
+  width: 18px;
+  height: 18px;
+}
+
+.ratingText {
+  font-size: var(--fs-body-sm);
+  font-weight: 600;
+  line-height: var(--lh-body-sm);
+  color: var(--foreground);
+  white-space: nowrap;
+}
+
+/* ---- Headline ---- */
+
+.headline {
+  width: 100%;
+}
+
+/* ---- Parágrafo ---- */
+
+.paragraph {
+  width: 100%;
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+/* ---- CTAs ---- */
+
+.ctas {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ---- Métricas: blocos de 73 / 85 / 131 · gap 40 · número 34/41 azul ---- */
+
+.metrics {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.metricLabel {
+  font-size: var(--fs-eyebrow);
+  line-height: 18px;
+  font-weight: 700;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* ---- Imagem ---- */
+
+.media {
+  position: relative;
+  width: 100%;
+}
+
+/* height: auto e obrigatorio — os atributos width/height do <img> viram
+   presentational hints, e sem isso o height="728" venceria o aspect-ratio. */
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 640 / 728;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* ---- Fade de saida da hero (medido: bottom 0, 150px, branco 0% -> 50%) ----
+   Fica acima da imagem e do grid, mas o conteudo da coluna de texto termina em
+   685 — exatamente onde o gradiente comeca — entao nada legivel e afetado. */
+
+.fade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 150px;
+  z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(
+    rgba(255, 255, 255, 0) 0%,
+    rgb(255, 255, 255) 50%
+  );
+}
+
+/* ---- Badges ancorados à caixa da imagem ----
+   Caixa #2FAAFF · radius 6 · padding 15 · ícone branco.
+   Tamanho e centro (em % da imagem) medidos por breakpoint. */
+
+.badges {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.badge {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: var(--size);
+  height: var(--size);
+  left: var(--x);
+  top: var(--y);
+  padding: 15px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: var(--radius-sm);
+  transform: translate(-50%, -50%) rotate(var(--rot));
+  animation: badgeFloat 6s var(--delay) ease-in-out infinite;
+}
+
+.badge svg {
+  width: 100%;
+  height: 100%;
+}
+
+.badge[data-badge="1"] { --rot: -24deg; --delay: 0s; }
+.badge[data-badge="2"] { --rot: 32deg; --delay: 0.7s; }
+.badge[data-badge="3"] { --rot: 19deg; --delay: 1.4s; }
+.badge[data-badge="4"] { --rot: -25deg; --delay: 2.1s; }
+
+/* Posições/tamanhos do tablet (medidos @1265).
+   Ajuste: repovoados ao redor do tronco (abaixo do queixo/capacete) em vez
+   do rosto — mesma ideia assimétrica/dinâmica de antes, só deslocada para
+   não cobrir cabeça nem rosto. */
+.badge[data-badge="1"] { --size: 85px; --x: 12%; --y: 40%; }
+.badge[data-badge="2"] { --size: 102px; --x: 88%; --y: 35%; }
+.badge[data-badge="3"] { --size: 110px; --x: 89%; --y: 68%; }
+.badge[data-badge="4"] { --size: 105px; --x: 11%; --y: 74%; }
+
+@keyframes badgeFloat {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) rotate(var(--rot));
+  }
+  50% {
+    transform: translate(-50%, calc(-50% - 10px)) rotate(var(--rot));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .badge {
+    animation: none;
+  }
+}
+
+/* ==========================================================================
+   Desktop >= 1340 — a composição de duas colunas medida na referência
+   ========================================================================== */
+
+@media (min-width: 1340px) {
+  .hero {
+    height: 835px;
+    padding-block: 100px;
+  }
+
+  .row {
+    flex-direction: row;
+    align-items: center;
+    height: 728px;
+    gap: 10px;
+  }
+
+  .content {
+    flex: 0 0 650px;
+    width: 650px;
+  }
+
+  .media {
+    flex: 0 0 640px;
+    width: 640px;
+    height: 728px;
+    /* Ajuste: a fileira (728) é mais alta que a caixa de conteúdo da seção
+       (635) e transborda 46.5px para cima do centro, o que colocava o topo
+       do capacete (y≈53.5, sem padding no próprio arquivo da imagem) acima
+       da base da navbar fixa (67px). Empurra só a coluna da imagem (texto
+       intocado) para abrir um respiro visível abaixo da navbar. */
+    margin-top: 52px;
+  }
+
+  .image {
+    height: 728px;
+    aspect-ratio: auto;
+  }
+
+  /* Posições/tamanhos do desktop (medidos @1440).
+     Ajuste: badge 1 (x:31.4% y:25%) caía sobre o rosto — todos os quatro
+     foram redistribuídos ao redor do tronco (abaixo do capacete/rosto),
+     mantendo a leitura assimétrica/dinâmica original. */
+  .badge[data-badge="1"] { --size: 70px; --x: 14%; --y: 40%; }
+  .badge[data-badge="2"] { --size: 50px; --x: 86.1%; --y: 34%; }
+  .badge[data-badge="3"] { --size: 60px; --x: 90%; --y: 68%; }
+  .badge[data-badge="4"] { --size: 55px; --x: 12%; --y: 72%; }
+}
+
+/* ==========================================================================
+   Mobile <= 809 — CTAs empilhados, parágrafo 16/22.4, badges ocultos
+   ========================================================================== */
+
+@media (max-width: 809px) {
+  /* O paragrafo NAO muda de escala: medido 18px/27px peso 700 preto em todos
+     os breakpoints (no mobile sao 4 linhas = 108px em 350px de largura).
+     A quebra autoral tambem continua ativa aqui — a referencia quebra em
+     "...for every fix on" / "your list — ..." tambem no mobile. */
+  .ctas {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .ctas > * {
+    width: 100%;
+  }
+
+  /* A regua de metricas NAO muda no mobile: mesmo gap 40 e mesmos labels em
+     uma linha so (bloco de 62px). Ela mede 392 numa coluna de 350 e transborda
+     — e exatamente o que a referencia faz. O `overflow: clip` da hero contem
+     esse transbordo, entao nao gera scroll horizontal na pagina. */
+
+  .badges {
+    display: none;
+  }
+}

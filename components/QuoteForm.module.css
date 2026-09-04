@@ -1,0 +1,265 @@
+/* Quote — todos os valores medidos em https://handyx.framer.website/ @1440.
+
+   section    top 2460 · 708 de altura · fundo branco · padding 100px 20px
+   container  1300x508 · flex row · gap 40 · align-items center
+   coluna E   630 · imagem 630x506 · radius 12
+   coluna D   630x508 · padding 40 · bg rgba(187,221,255,.2) · radius 6 · gap 20
+
+   Conferencia: 66 + 58 + 58 + 118 + 48 + (4 x 20) = 428 = 508 - 80 de padding. */
+
+.quote {
+  padding-block: 100px;
+  background: var(--background);
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 40px;
+}
+
+/* ---- Coluna esquerda: imagem ---- */
+
+/* `flex-basis: 0` resolve no CONTENT box, entao os 80px de padding do
+   formulario entrariam por fora e a divisao sairia 590/670. Uma base em
+   comprimento respeita o `box-sizing: border-box` e da 630/630 exatos. */
+.media {
+  flex: 1 1 calc((100% - 40px) / 2);
+  min-width: 0;
+}
+
+.frame {
+  position: relative;
+  width: 100%;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: 506px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: var(--radius-lg);
+}
+
+/* ---- Coluna direita: o cartao do formulario ---- */
+
+.form {
+  flex: 1 1 calc((100% - 40px) / 2);
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 40px;
+  background: var(--accent-tint);
+  border-radius: var(--radius-sm);
+}
+
+/* header 66 = titulo 34 + gap 10 + descricao 22 */
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.title {
+  font-size: var(--fs-card-title);
+  line-height: var(--lh-card-title);
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.desc {
+  font-size: var(--fs-body-sm);
+  line-height: var(--lh-body-sm);
+  font-weight: 600;
+  color: var(--muted);
+}
+
+/* O <form> não deve gerar caixa própria — os campos precisam continuar como
+   filhos diretos do flex column de .form (gap 20), exatamente como antes de
+   a marcação ganhar um elemento <form> para o onSubmit. */
+.formEl {
+  display: contents;
+}
+
+/* ---- Estado de sucesso (sem backend real, apenas confirmação na UI) ---- */
+
+.success {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.successIcon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.successIcon svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* ---- Campos ---- */
+
+/* min-width: 0 e obrigatorio aqui: o <select> tem largura intrinseca grande
+   (a maior <option>) e sem isso ele empurra a coluna do formulario para 670,
+   roubando 40px da imagem. */
+.fieldRow {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  min-width: 0;
+}
+
+/* 265x58 = label 18 + caixa 40 */
+.field {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  cursor: text;
+}
+
+.label {
+  font-size: var(--fs-eyebrow);
+  line-height: 18px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+/* A borda/fundo do campo vive nesta caixa — o input em si e transparente.
+   Borda sutil em repouso e laranja no foco, coerente com os demais cards
+   refinados da pagina. */
+.control {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  height: 40px;
+  padding: 12px;
+  background: var(--background);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: var(--radius-sm);
+  transition: border-color var(--dur-fast) var(--ease);
+}
+
+.control:focus-within {
+  border-color: var(--accent);
+}
+
+.control input,
+.control select,
+.control textarea {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  font-size: var(--fs-input);
+  line-height: 16.8px;
+  font-weight: 600;
+  color: var(--foreground);
+  outline: none;
+}
+
+.control input::placeholder,
+.control textarea::placeholder {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.control select {
+  width: 100%;
+  min-width: 0;
+  cursor: pointer;
+}
+
+/* Bloco do textarea: label 18 + caixa 100 = 118 */
+.textareaBox {
+  align-items: stretch;
+  height: 100px;
+}
+
+.textareaBox textarea {
+  height: 100%;
+  resize: none;
+  font-family: inherit;
+}
+
+/* ---- Botao ---- */
+
+.submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 48px;
+  padding: 12px 25px;
+  background: var(--accent);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-body-sm);
+  line-height: var(--lh-body-sm);
+  font-weight: 600;
+  color: var(--on-accent);
+  transition: background-color var(--dur-fast) var(--ease);
+}
+
+.submit svg {
+  width: 15px;
+  height: 15px;
+  flex: none;
+  transition: transform var(--dur) var(--ease);
+}
+
+.submit:hover {
+  background: var(--accent-hover);
+}
+
+.submit:hover svg {
+  transform: translateX(3px);
+}
+
+/* ==========================================================================
+   Tablet / mobile
+   ========================================================================== */
+
+/* Medido: o padding da secao ja cai para 50 no tablet, o container vira coluna
+   com gap 40 e a imagem MANTEM 506 de altura. O card do formulario segue com
+   padding 40 em todos os breakpoints. */
+@media (max-width: 1339px) {
+  .quote {
+    padding-block: 50px;
+  }
+
+  .row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 40px;
+  }
+
+  .media,
+  .form {
+    flex: initial;
+    width: 100%;
+  }
+}
+
+@media (max-width: 809px) {
+  /* Medido: 292, nao 260 — a imagem e mais alta aqui que a do About. */
+  .image {
+    height: 292px;
+  }
+
+  /* A referencia NAO empilha os campos no mobile: mantem 2 por linha com 125px
+     cada (card 350x518, padding 40, gap 20). Reproduzido por fidelidade — vale
+     revisar essa escolha quando o template virar site de cliente, porque 125px
+     e apertado para digitar. */
+
+}

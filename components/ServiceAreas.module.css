@@ -1,0 +1,148 @@
+/* Service Areas — medido em https://handyx.framer.website/ @1440.
+
+   section  bg #F2F8FF · padding compactado (ver nota de ajuste abaixo)
+   inner    row · gap 80 · align-items FLEX-START (topo alinhado)
+   esquerda 520 · direita 700 (column, gap reduzido)
+   imagem   700x420 · radius 6
+
+   Ajuste (revisão de espaçamento): o `align-items: flex-end` original
+   empurrava o bloco esquerdo para baixo até encostar na base da imagem,
+   abrindo um vazio grande acima dele quando a coluna direita ficou mais
+   alta. Trocado para `flex-start` para alinhar os topos, com paddings e
+   gaps reduzidos para compactar a seção sem mudar conteúdo/design. */
+
+.areas {
+  padding-block: 40px;
+  background: var(--surface-soft);
+}
+
+.inner {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 80px;
+}
+
+.left {
+  flex: 0 0 520px;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.leftHead {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.headline {
+  width: 100%;
+}
+
+.right {
+  flex: 1 0 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.paragraph {
+  font-size: var(--fs-body-sm);
+  line-height: var(--lh-body-sm);
+  font-weight: 600;
+  color: var(--muted);
+}
+
+/* Grade de cidades: 2 colunas, apresentacao editorial com marcador
+   geometrico minimalista + divisor sutil embaixo de cada linha (a ultima
+   linha da grade nao leva divisor). */
+.cities {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 48px;
+}
+
+.city {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 14px;
+  padding-block: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.09);
+}
+
+.city:nth-last-child(-n + 2) {
+  border-bottom: none;
+}
+
+/* Marcador geometrico minimalista — barra fina laranja, sem caixa/emoji. */
+.marker {
+  flex: none;
+  width: 14px;
+  height: 2px;
+  background: var(--accent);
+}
+
+.cityName {
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+/* Crop mais editorial: um pouco mais alta e com radius levemente maior. */
+.image {
+  display: block;
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+  object-position: center 30%;
+  border-radius: var(--radius-md);
+}
+
+/* ==========================================================================
+   Tablet / mobile
+   ========================================================================== */
+
+@media (max-width: 1339px) {
+  .areas {
+    padding-block: 48px;
+  }
+
+  .inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 32px;
+  }
+
+  .left,
+  .right {
+    flex: initial;
+    max-width: none;
+    width: 100%;
+  }
+}
+
+@media (max-width: 809px) {
+  .cities {
+    grid-template-columns: 1fr;
+  }
+
+  /* Em coluna unica "ultima linha" e so o ultimo item, nao os dois ultimos. */
+  .city:nth-last-child(-n + 2) {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.09);
+  }
+
+  .city:last-child {
+    border-bottom: none;
+  }
+
+  .image {
+    height: 280px;
+  }
+}

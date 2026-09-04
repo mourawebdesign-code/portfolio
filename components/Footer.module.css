@@ -1,0 +1,195 @@
+/* Footer — medido em https://handyx.framer.website/ @1440.
+
+   Ajuste (revisão de espaçamento): o bloco superior tinha `min-height: 470px`
+   + `justify-content: space-between`, o que forçava um vão preto enorme
+   entre o headline/redes sociais e as informações de contato sempre que o
+   conteúdo real era mais curto que 470px. Removido o min-height forçado; o
+   footer agora se adapta à altura real do conteúdo, com gaps moderados. */
+
+.footer {
+  padding: 64px 0 0;
+  background: var(--footer-bg);
+  color: var(--footer-fg);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.top {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.topRow {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+/* Medido: 42/50.4 peso 700 branco */
+.headline {
+  max-width: 560px;
+  font-size: var(--fs-h3);
+  line-height: var(--lh-h3);
+  font-weight: 700;
+  color: var(--footer-fg);
+}
+
+.community {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.communityTitle {
+  font-size: 22px;
+  line-height: 26.4px;
+  font-weight: 700;
+  color: var(--footer-fg);
+}
+
+.socials {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+}
+
+.socials a {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--footer-fg);
+  transition: background-color var(--dur-fast) var(--ease);
+}
+
+.socials a:hover {
+  background: var(--accent);
+}
+
+/* ---- Contatos: rotulo 12/18 + valor 18/27, ambos brancos ---- */
+
+.contacts {
+  display: flex;
+  flex-direction: row;
+  gap: 80px;
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.contactLabel {
+  font-size: var(--fs-eyebrow);
+  line-height: 18px;
+  font-weight: 700;
+  color: var(--footer-fg);
+}
+
+.contactValue {
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  font-weight: 700;
+  color: var(--footer-fg);
+  transition: color var(--dur-fast) var(--ease);
+}
+
+a.contactValue:hover {
+  color: var(--accent);
+}
+
+/* ---- Barra inferior: 67 = 20 + 27 + 20 ---- */
+
+.bottom {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding-block: 20px;
+}
+
+.links {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+}
+
+.link {
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  font-weight: 700;
+  color: var(--footer-fg);
+  transition: color var(--dur-fast) var(--ease);
+}
+
+.link:hover {
+  color: var(--accent);
+}
+
+.copyright {
+  font-size: var(--fs-body-sm);
+  line-height: var(--lh-body-sm);
+  font-weight: 600;
+  color: var(--footer-fg);
+}
+
+.srOnlyName {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+/* ==========================================================================
+   Tablet / mobile
+   ========================================================================== */
+
+@media (max-width: 1339px) {
+  .footer {
+    padding-top: 50px;
+  }
+
+  .top {
+    gap: 40px;
+  }
+
+  .contacts {
+    gap: 40px;
+  }
+}
+
+@media (max-width: 809px) {
+  .topRow {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .contacts {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .links {
+    flex-wrap: wrap;
+    gap: 20px 24px;
+  }
+}
