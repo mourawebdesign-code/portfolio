@@ -1,0 +1,178 @@
+/* Reference: section 70/140, inner gap 64, head 1365x126 centred,
+   row 1365x612 gap 24 with TWO cards (padding 32, image 607x373 r16). */
+
+.section {
+  padding: 70px 0 140px;
+  background: var(--background);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  height: 41px;
+  padding: 7px 24px 7px 16px;
+  border-radius: 24px;
+  background: rgba(37, 183, 218, 0.12);
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.eyebrow img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+/* ---- Two-up grid ---- */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 33px;
+  padding: 32px;
+  border-radius: 24px;
+  background: var(--surface);
+  /* `transform`/`opacity` are declared here too (not just on the global
+     [data-reveal] rule) so this card's own `transition` shorthand can't
+     silently win the cascade tie and drop the reveal fade — confirmed it
+     does win in this build. Each also needs its own `var(--reveal-delay)`:
+     the shorthand resets delay to 0s for every property it lists, which
+     would otherwise silently kill the per-card stagger. */
+  transition:
+    background var(--dur) var(--ease),
+    opacity 0.7s var(--ease) var(--reveal-delay, 0s),
+    transform 0.7s var(--ease) var(--reveal-delay, 0s);
+}
+
+.card:hover {
+  background: var(--surface-2);
+}
+
+.cardMedia {
+  width: 100%;
+  aspect-ratio: 607 / 373;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.cardMedia img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s var(--ease);
+}
+
+.card:hover .cardMedia img {
+  transform: scale(1.05);
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cardRule {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  line-height: 1.4;
+  letter-spacing: normal;
+  color: var(--text-muted);
+}
+
+.metaItem img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.cardTitle {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  transition: color var(--dur-fast) var(--ease);
+}
+
+.card:hover .cardTitle {
+  color: var(--primary);
+}
+
+.foot {
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 56px 0 88px;
+  }
+
+  .inner {
+    gap: 40px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    padding: 20px;
+    gap: 24px;
+  }
+
+  .cardTitle {
+    font-size: 24px;
+  }
+}

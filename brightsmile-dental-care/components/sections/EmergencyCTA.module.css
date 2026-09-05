@@ -1,0 +1,236 @@
+/* Reference: white section 1425x702, padding 70px 30px.
+   Inside it a cyan rounded card 1365x562, radius 32, #25b7da,
+   padding 88px 0 86px 88px. Composition sits absolutely on the card:
+   shape 1087x1129 @ (308, -284), figure 473x543 @ (784, 19),
+   badge 109x96 @ (777, 121), "Want to Talk?" @ (1127, 323),
+   "Hello!" @ (747, 435). Copy column 630x388 @ (88, 88), gap 48. */
+
+.section {
+  padding: 70px 0;
+  background: var(--background);
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  height: 562px;
+  padding: 88px 0 86px 88px;
+  border-radius: 32px;
+  background: var(--primary);
+  overflow: hidden;
+  isolation: isolate;
+  color: #ffffff;
+}
+
+/* ---- Composition ---- */
+
+.shape {
+  position: absolute;
+  left: 308px;
+  top: -284px;
+  z-index: 1;
+  width: 1087px;
+  height: 1129px;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+
+.figure {
+  position: absolute;
+  left: 784px;
+  top: 19px;
+  z-index: 2;
+  width: 473px;
+  height: 543px;
+}
+
+.person {
+  position: relative;
+  z-index: 1;
+  width: 473px;
+  height: 543px;
+  object-fit: contain;
+  object-position: 50% 100%;
+}
+
+.badge {
+  position: absolute;
+  left: -7px;
+  top: 102px;
+  z-index: 2;
+  width: 109px;
+  height: 96px;
+  object-fit: contain;
+}
+
+/* Floating labels beside the figure */
+.label {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  height: 53px;
+  padding-inline: 24px;
+  border-radius: 999px;
+  background: #ffffff;
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  white-space: nowrap;
+  box-shadow: 0 14px 32px -18px rgba(13, 30, 36, 0.45);
+}
+
+.labelTalk {
+  left: 343px;
+  top: 304px;
+}
+
+.labelHello {
+  left: -37px;
+  top: 416px;
+}
+
+/* ---- Copy ---- */
+
+.copy {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 48px;
+  width: 630px;
+}
+
+.copyText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  height: 41px;
+  padding: 7px 24px 7px 16px;
+  border-radius: 24px;
+  background: #ffffff;
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.eyebrow img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+}
+
+.body {
+  font-size: 18px;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ---- Responsive ---- */
+
+@media (max-width: 1439px) {
+  .card {
+    padding-right: 0;
+  }
+
+  .figure {
+    left: auto;
+    right: -40px;
+  }
+
+  .shape {
+    left: auto;
+    right: -280px;
+  }
+
+  .labelTalk {
+    display: none;
+  }
+}
+
+@media (max-width: 1100px) {
+  .card {
+    height: auto;
+    padding: 64px;
+  }
+
+  .copy {
+    width: 100%;
+    max-width: 560px;
+  }
+
+  .figure {
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    margin-inline: auto;
+  }
+
+  .shape {
+    right: -400px;
+    opacity: 0.7;
+  }
+
+  .labelHello {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 40px 0;
+  }
+
+  .card {
+    padding: 40px 24px;
+    gap: 40px;
+    border-radius: 24px;
+  }
+
+  .figure {
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+  }
+
+  .person {
+    width: 100%;
+    height: auto;
+  }
+
+  .badge {
+    left: 0;
+    top: 60px;
+    width: 76px;
+    height: 67px;
+  }
+}

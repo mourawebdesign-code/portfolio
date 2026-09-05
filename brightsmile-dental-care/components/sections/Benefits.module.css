@@ -1,0 +1,107 @@
+/* Reference: section 280h, padding 70px 0.
+   Ticker viewport 1425x140 (overflow hidden) > UL flex gap 50 >
+   LI flex gap 50 = [icon 100x100][word 116px]. Spacing is a uniform 50px
+   between every element, so the track reads icon · word · icon · word. */
+
+.section {
+  padding: 70px 0;
+  background: var(--background);
+}
+
+.viewport {
+  display: flex;
+  height: 140px;
+  overflow: hidden;
+}
+
+.track {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  flex: 0 0 auto;
+  padding-right: 50px;
+  animation: marquee 32s linear infinite;
+  will-change: transform;
+}
+
+@keyframes marquee {
+  to {
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  flex: 0 0 auto;
+}
+
+.mark {
+  flex: 0 0 auto;
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  animation: mark-spin 12s linear infinite;
+  will-change: transform;
+}
+
+@keyframes mark-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.word {
+  font-family: var(--font-display);
+  font-size: var(--fs-marquee);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+@media (max-width: 1024px) {
+  .viewport {
+    height: 110px;
+  }
+
+  .track,
+  .item {
+    gap: 36px;
+  }
+
+  .track {
+    padding-right: 36px;
+  }
+
+  .mark {
+    width: 72px;
+    height: 72px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 44px 0;
+  }
+
+  .viewport {
+    height: 78px;
+  }
+
+  .track,
+  .item {
+    gap: 24px;
+  }
+
+  .track {
+    padding-right: 24px;
+  }
+
+  .mark {
+    width: 48px;
+    height: 48px;
+  }
+}

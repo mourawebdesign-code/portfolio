@@ -1,0 +1,288 @@
+/* Reference: section 140/70, inner gap 64.
+   Head 1365x126 gap 8, centred; eyebrow pill 268x41; title 70px.
+   Card row 1365x458 gap 24 = rating 444x458 (pad 64/80, r32, #f4f4f6)
+   + quote 897x450 (pad 64, r32, transparent). */
+
+.section {
+  padding: 140px 0 70px;
+  background: var(--background);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  height: 41px;
+  padding: 7px 24px 7px 16px;
+  border-radius: 24px;
+  background: rgba(37, 183, 218, 0.12);
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.eyebrow img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 70px;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+/* ---- Slider ---- */
+
+.stage {
+  overflow: hidden;
+  border-radius: 32px;
+}
+
+.viewport {
+  display: flex;
+  transition: transform 0.65s var(--ease);
+}
+
+.slide {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  flex: 0 0 100%;
+  height: 458px;
+}
+
+/* Rating card — 444x458 */
+.rating {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex: 0 0 444px;
+  width: 444px;
+  padding: 64px 80px;
+  border-radius: 32px;
+  background: var(--surface);
+  text-align: center;
+}
+
+.ratingLabel {
+  display: block;
+  font-size: 18px;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  color: var(--text-muted);
+}
+
+.score {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 64px;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+.stars {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  color: #f5b544;
+}
+
+/* Rule + prev/next live inside the rating card in the reference */
+.ratingRule {
+  width: 100%;
+  height: 1px;
+  margin-top: 12px;
+  background: var(--border);
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.arrow {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #ffffff;
+  transition: background var(--dur-fast) var(--ease);
+}
+
+.arrow:hover {
+  background: var(--primary);
+}
+
+.reviews {
+  display: block;
+  font-size: 18px;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  color: var(--text-secondary);
+}
+
+/* Quote card — 897x450, transparent */
+.quote {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 28px;
+  flex: 1 1 897px;
+  min-width: 0;
+  padding: 64px;
+  border-radius: 32px;
+  background: #ffffff;
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+
+.quoteTitle {
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.quoteBody {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 4px;
+}
+
+.avatar {
+  flex: 0 0 auto;
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  overflow: hidden;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 0%;
+}
+
+.authorName {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+.authorRole {
+  display: block;
+  font-size: 16px;
+  line-height: 1.4;
+  letter-spacing: normal;
+  color: var(--text-muted);
+}
+
+/* ---- Responsive ---- */
+
+@media (max-width: 1280px) {
+  .rating {
+    flex: 0 0 380px;
+    width: 380px;
+    padding: 48px 44px;
+  }
+
+  .quote {
+    padding: 48px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .slide {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .rating {
+    flex: 1 1 auto;
+    width: 100%;
+    gap: 24px;
+  }
+
+  .quote {
+    flex: 1 1 auto;
+    padding: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 88px 0 56px;
+  }
+
+  .inner {
+    gap: 40px;
+  }
+
+  .title {
+    font-size: var(--fs-h2);
+  }
+
+  .rating {
+    padding: 32px;
+  }
+
+  .score {
+    font-size: 48px;
+  }
+
+  .quoteBody {
+    font-size: 22px;
+  }
+
+  .arrow {
+    width: 48px;
+    height: 48px;
+  }
+}

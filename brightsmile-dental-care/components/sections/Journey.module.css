@@ -1,0 +1,311 @@
+/* Reference geometry: section 70/140, inner gap 64.
+   Head 1365x215 (left 630, right 444 bottom-aligned).
+   Metrics row 1365x441, gap 20, columns 412 / 346 / 567. */
+
+.section {
+  padding: 70px 0 140px;
+  background: var(--background);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+/* ---- Head ---- */
+
+.head {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+  width: 100%;
+}
+
+.headLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 630px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  gap: 16px;
+  height: 41px;
+  padding: 7px 24px 7px 16px;
+  border-radius: 24px;
+  background: rgba(37, 183, 218, 0.12);
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.eyebrow img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+.headRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+  width: 444px;
+}
+
+.headBody {
+  font-size: 18px;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  color: var(--text-secondary);
+}
+
+/* ---- Metrics row ---- */
+
+.metrics {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 20px;
+  width: 100%;
+  height: 441px;
+}
+
+/* Column 1 — 412 wide: badge card + 412x280 image */
+.col1 {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex: 0 0 412px;
+  width: 412px;
+}
+
+.badgeCard {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+  padding: 0 32px;
+  border-radius: 24px;
+  background: #ffffff;
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+
+.badgeAvatars {
+  flex: 0 0 auto;
+  width: 210px;
+  height: 60px;
+  object-fit: contain;
+}
+
+.badgeNumber {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+.badgeLabel {
+  display: block;
+  font-size: 16px;
+  line-height: 1.4;
+  letter-spacing: normal;
+  color: var(--text-muted);
+}
+
+.col1Image {
+  flex: 0 0 280px;
+  width: 412px;
+  height: 280px;
+  border-radius: 24px;
+  object-fit: cover;
+}
+
+/* Column 2 — 346 wide: three stacked metric cards, gap 24 */
+.col2 {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex: 0 0 346px;
+  width: 346px;
+}
+
+.metricCard {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
+  flex: 1;
+  padding: 0 32px;
+  border-radius: 24px;
+  background: var(--surface);
+}
+
+/* White rounded tile holding the line icon */
+.metricIconBox {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 72px;
+  height: 72px;
+  border-radius: 18px;
+  background: #ffffff;
+}
+
+.metricIcon {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.metricNumber {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.metricLabel {
+  display: block;
+  font-size: 18px;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  color: var(--text-muted);
+}
+
+/* Column 3 — 567x434 image */
+.col3 {
+  flex: 1 1 567px;
+  min-width: 0;
+}
+
+.col3Image {
+  width: 100%;
+  height: 434px;
+  border-radius: 24px;
+  object-fit: cover;
+}
+
+/* ---- Responsive ---- */
+
+@media (max-width: 1439px) {
+  .headLeft {
+    width: auto;
+    flex: 1 1 auto;
+    max-width: 630px;
+  }
+
+  .col1 {
+    flex: 1 1 0;
+    width: auto;
+  }
+
+  .col2 {
+    flex: 1 1 0;
+    width: auto;
+  }
+
+  .col1Image {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1100px) {
+  .metrics {
+    flex-wrap: wrap;
+    height: auto;
+  }
+
+  .col1,
+  .col2 {
+    flex: 1 1 300px;
+    height: 441px;
+  }
+
+  .col3 {
+    flex: 1 1 100%;
+  }
+
+  .col3Image {
+    height: 380px;
+  }
+}
+
+@media (max-width: 900px) {
+  .head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+  }
+
+  .headRight {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 48px 0 88px;
+  }
+
+  .inner {
+    gap: 40px;
+  }
+
+  .metrics {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .col1,
+  .col2 {
+    flex: 1 1 auto;
+    height: auto;
+  }
+
+  .badgeCard,
+  .metricCard {
+    padding: 24px;
+  }
+
+  .metricIconBox {
+    width: 60px;
+    height: 60px;
+  }
+
+  .col1Image {
+    height: 240px;
+    flex: 0 0 240px;
+  }
+
+  .col3Image {
+    height: 280px;
+  }
+}

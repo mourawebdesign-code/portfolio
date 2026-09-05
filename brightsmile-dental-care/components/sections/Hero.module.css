@@ -1,0 +1,526 @@
+/* Geometry transcribed from the reference at a 1440px viewport
+   (container 1365, gutter 30). */
+
+.section {
+  position: relative;
+  padding: 240px 0 86px;
+  background: var(--background);
+}
+
+/* Full-bleed plate: 1425x797, absolute at the top of the section. */
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 797px;
+  background: linear-gradient(rgb(37, 183, 218) 0%, rgba(255, 255, 255, 0.7) 100%);
+}
+
+.inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 96px;
+}
+
+/* ---- Title row: 1365x227, gap 16, centred ---- */
+
+.titleRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+  height: 227px;
+  margin: 0;
+}
+
+.word {
+  font-family: var(--font-display);
+  font-size: var(--fs-hero);
+  line-height: 1.1;
+  letter-spacing: -0.05em;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.wordLead {
+  font-weight: 500;
+}
+
+.wordTrail {
+  font-weight: 400;
+}
+
+/* Badge: 198x190 slot. Reference structure is TWO SIBLINGS —
+   "Badge" (170x170 white disc + 80x100 artwork) and "Border"
+   (190x190, ::after = 3px dashed #fff, radius 100%).
+   Only the border ring rotates; the tooth stays fixed. */
+.badge {
+  --ring: 190px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 198px;
+  height: 190px;
+}
+
+.badgeDisc {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 170px;
+  height: 170px;
+  padding: 35px 45px;
+  border-radius: 100%;
+  background: #ffffff;
+}
+
+.badgeDisc img {
+  width: 80px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.badgeRing {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--ring);
+  height: var(--ring);
+  margin-top: calc(var(--ring) / -2);
+  margin-left: calc(var(--ring) / -2);
+  border: 3px dashed #ffffff;
+  border-radius: 100%;
+  pointer-events: none;
+  animation: badge-spin 24s linear infinite;
+  /* Runs forever, so keep this one layer promoted permanently rather than
+     paying the promote/demote cost on every cycle. */
+  will-change: transform;
+}
+
+@keyframes badge-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---- Cards row: 1365x483, gap 24, align centre ---- */
+
+.cardsRow {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  height: 483px;
+}
+
+/* Decorative plates that overhang the container by 16px. */
+.shape {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.shapeLeft {
+  top: -16px;
+  left: -16px;
+}
+
+.shapeRight {
+  bottom: -16px;
+  right: -16px;
+}
+
+/* ---- Card A: Connect with Us ---- */
+
+.connect {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 45px;
+  flex: 0 0 auto;
+  width: 444px;
+  height: 483px;
+  padding: 48px;
+  border-radius: 24px;
+  background: var(--primary);
+  color: #ffffff;
+}
+
+.connectHead {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 348px;
+}
+
+.connectTitle {
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.03em;
+  text-align: center;
+}
+
+.connectBody {
+  font-size: 18px;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.infoStack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  width: 348px;
+}
+
+.infoRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  height: 100px;
+  padding: 20px 24px;
+  border-radius: 16px;
+  background: #ffffff;
+  color: var(--ink);
+}
+
+.infoIcon {
+  flex: 0 0 auto;
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+}
+
+.infoLabel {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.03em;
+}
+
+.infoValue {
+  display: block;
+  font-size: 18px;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  color: rgba(13, 30, 36, 0.7);
+}
+
+/* ---- Card B: portrait, 429x466 ---- */
+
+.portrait {
+  position: relative;
+  flex: 0 0 auto;
+  width: 429px;
+  height: 466px;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.portrait > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+.portraitOverlay {
+  position: absolute;
+  left: 32px;
+  top: 329px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 15px;
+  width: 347px;
+}
+
+.portraitPill {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  height: 50px;
+  padding: 11px 149px 11px 24px;
+  border-radius: 12px;
+  background: rgba(13, 30, 36, 0.25);
+  backdrop-filter: blur(6px);
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 28px;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.portraitSign {
+  width: 85px;
+  height: 40px;
+  object-fit: contain;
+}
+
+/* ---- Card C: gradient media card, 444x482 ---- */
+
+.help {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  flex: 0 0 auto;
+  width: 444px;
+  height: 482px;
+  padding: 48px;
+  border-radius: 24px;
+  background: linear-gradient(rgb(33, 101, 118) 0%, rgb(13, 30, 36) 100%);
+  color: #ffffff;
+}
+
+.helpMedia {
+  width: 348px;
+  height: 182px;
+  border-radius: 16px;
+  object-fit: cover;
+}
+
+.helpFoot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  width: 348px;
+}
+
+.helpBody {
+  width: 100%;
+  font-size: 18px;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.helpBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 260px;
+  height: 59px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.28);
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 28px;
+  letter-spacing: -0.02em;
+  transition: background var(--dur-fast) var(--ease),
+    color var(--dur-fast) var(--ease);
+}
+
+.helpBtn img {
+  width: 20px;
+  height: 15px;
+  transition: transform var(--dur-fast) var(--ease);
+}
+
+.helpBtn:hover {
+  background: #ffffff;
+  color: var(--ink);
+}
+
+.helpBtn:hover img {
+  transform: translate3d(4px, 0, 0);
+  filter: invert(1);
+}
+
+/* ==========================================================================
+   Responsive — the reference collapses the three cards before stacking them
+   ========================================================================== */
+
+@media (max-width: 1439px) {
+  .cardsRow {
+    height: auto;
+  }
+
+  .connect,
+  .help {
+    width: auto;
+    flex: 1 1 0;
+    height: 483px;
+  }
+
+  .portrait {
+    flex: 1 1 0;
+    width: auto;
+  }
+
+  .connectHead,
+  .infoStack,
+  .helpMedia,
+  .helpFoot {
+    width: 100%;
+  }
+
+  .portraitOverlay {
+    left: 24px;
+    right: 24px;
+    top: auto;
+    bottom: 32px;
+    width: auto;
+  }
+
+  .portraitPill {
+    padding-right: 24px;
+  }
+}
+
+@media (max-width: 1280px) {
+  .section {
+    padding-top: 200px;
+  }
+
+  .badge {
+    --ring: 152px;
+    width: 160px;
+    height: 152px;
+  }
+
+  .badgeDisc {
+    width: 132px;
+    height: 132px;
+    padding: 26px 34px;
+  }
+
+  .badgeDisc img {
+    width: 62px;
+    height: 78px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .cardsRow {
+    flex-wrap: wrap;
+  }
+
+  .connect {
+    flex: 1 1 320px;
+  }
+
+  .portrait {
+    flex: 1 1 320px;
+    height: 483px;
+  }
+
+  .help {
+    flex: 1 1 100%;
+    height: auto;
+    padding: 40px;
+  }
+
+  .helpMedia {
+    height: 220px;
+  }
+
+  .shape {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 148px 0 56px;
+  }
+
+  .backdrop {
+    height: 620px;
+  }
+
+  .inner {
+    gap: 56px;
+  }
+
+  .titleRow {
+    height: auto;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .badge {
+    --ring: 100px;
+    width: 104px;
+    height: 100px;
+  }
+
+  .badgeRing {
+    border-width: 2px;
+  }
+
+  .badgeDisc {
+    width: 88px;
+    height: 88px;
+    padding: 16px 22px;
+  }
+
+  .badgeDisc img {
+    width: 44px;
+    height: 55px;
+  }
+
+  .cardsRow {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .connect,
+  .portrait,
+  .help {
+    flex: 1 1 auto;
+    width: 100%;
+    height: auto;
+  }
+
+  .connect {
+    padding: 32px;
+  }
+
+  .portrait {
+    aspect-ratio: 429 / 466;
+  }
+
+  .help {
+    padding: 32px;
+  }
+
+  .helpBtn {
+    width: 100%;
+  }
+}
