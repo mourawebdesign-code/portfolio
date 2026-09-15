@@ -51,7 +51,6 @@ export default function TreatmentCarousel({
               <span className={styles.index}>{String(i + 1).padStart(2, "0")}</span>
               <p className={styles.name}>{tr.name}</p>
               <p className={styles.desc}>{tr.desc}</p>
-              <p className={styles.meta}>{tr.meta}</p>
             </article>
           ))}
         </div>
