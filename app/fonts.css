@@ -1,0 +1,44 @@
+/* Self-hosted faces, mirrored from the reference's own @font-face set. */
+
+@font-face {
+  font-family: "PP Mori Regular";
+  src: url("/organic/fonts/AE9QGl3EikgcPbta4IZVlvWEZZo.woff2") format("woff2");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
+}
+@font-face {
+  font-family: "PP Mori Regular Italic";
+  src: url("/organic/fonts/yRKLlosQOD06bSb3nxxLasGiE.woff2") format("woff2");
+  font-display: swap;
+  font-style: italic;
+  font-weight: 400;
+}
+@font-face {
+  font-family: "PP Mori SemiBold";
+  src: url("/organic/fonts/T93398VnrgrUA71qcf61Yy5qrc.woff2") format("woff2");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 600;
+}
+@font-face {
+  font-family: "PP Mori SemiBold Italic";
+  src: url("/organic/fonts/hK6CYfD6lKQ1HuC543veLK3Pcg.woff2") format("woff2");
+  font-display: swap;
+  font-style: italic;
+  font-weight: 600;
+}
+@font-face {
+  font-family: "PP Editorial New Italic";
+  src: url("/organic/fonts/vlcgXHhjPOw3oP9tEp2XLY0L7i0.woff2") format("woff2");
+  font-display: swap;
+  font-style: italic;
+  font-weight: 400;
+}
+@font-face {
+  font-family: "PP Editorial New Ultrabold Italic";
+  src: url("/organic/fonts/KUw3yx9Zs4fmOdYvZyXd1qbQ74o.woff2") format("woff2");
+  font-display: swap;
+  font-style: italic;
+  font-weight: 800;
+}

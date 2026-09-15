@@ -1,0 +1,71 @@
+.section {
+  position: relative;
+  width: 100%;
+  background: #fff;
+  padding: var(--space-section) 0 var(--space-section-sm);
+}
+
+.head {
+  text-align: center;
+  margin-bottom: clamp(40px, 5vw, 64px);
+}
+
+.kicker {
+  font-family: var(--font-sans-semibold);
+  font-weight: 600;
+  font-size: var(--h2);
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.handle {
+  margin-top: 6px;
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: var(--editorial-lg);
+  color: var(--text);
+}
+
+.viewport {
+  width: 100%;
+  overflow: hidden;
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  gap: clamp(8px, 1vw, 12px);
+  animation: marquee 55s linear infinite;
+}
+
+.viewport:hover .track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.tile {
+  flex: none;
+  width: clamp(120px, 13vw, 187px);
+  height: clamp(144px, 15.5vw, 224px);
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.big {
+  width: clamp(220px, 27vw, 390px);
+  height: clamp(264px, 32.5vw, 467px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    animation: none;
+  }
+}

@@ -1,0 +1,346 @@
+/* ---------------------------------------------------------------------
+   Editorial reproduction of the approved reference: warm cream, a single-
+   line mixed serif/serif-italic headline, two large alternating photo +
+   list blocks (no cards), circular outline arrows, thin dividing rules,
+   quiet in-image captions, and a one-line italic signature to close —
+   nothing card-shaped, nothing SaaS-shaped.
+   --------------------------------------------------------------------- */
+
+.section {
+  position: relative;
+  width: 100%;
+  /* Retinted to the --section-bg family (was the same peach-white recipe
+     as BrandPrinciples right above it) so the two sections read as
+     distinct chapters instead of one continuous block. */
+  background:
+    radial-gradient(ellipse at 82% 10%, rgba(255, 194, 145, 0.13) 0%, rgba(255, 194, 145, 0.05) 30%, transparent 58%),
+    radial-gradient(ellipse at 10% 88%, rgba(255, 107, 112, 0.05) 0%, transparent 46%),
+    linear-gradient(115deg, #f8f5f0 0%, #f3efe7 48%, #efe9e0 100%);
+  padding: clamp(88px, 8vw, 120px) 0 clamp(60px, 6vw, 90px);
+  overflow: clip;
+}
+
+.curveLeft,
+.curveRight {
+  position: absolute;
+  top: 8%;
+  width: clamp(120px, 12vw, 220px);
+  height: 84%;
+  pointer-events: none;
+}
+
+.curveLeft {
+  left: 0;
+}
+
+.curveRight {
+  right: 0;
+}
+
+/* --- header -------------------------------------------------------------- */
+
+.heading {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: clamp(100px, 9vw, 140px);
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #c06f5f;
+  margin-bottom: 22px;
+}
+
+.eyebrowRule {
+  width: 32px;
+  height: 1px;
+  background: #c06f5f;
+  opacity: 0.5;
+}
+
+/* The project ships only an italic serif face (no upright weight of the
+   same family exists in app/fonts.css) — rather than pull in a new font
+   just to make "Cuidado feito" upright, both halves share the one serif
+   italic already used everywhere else in the site, and the contrast the
+   reference wants comes from color instead: near-black vs. terracotta. */
+.title {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(54px, 6vw, 90px);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: #171513;
+  white-space: nowrap;
+}
+
+.title em {
+  font-style: italic;
+  color: #c06f5f;
+}
+
+.intro {
+  margin: 22px auto 0;
+  max-width: 520px;
+  font-family: var(--font-sans);
+  font-size: clamp(17px, 1.2vw, 20px);
+  line-height: 1.6;
+  color: #5c5854;
+}
+
+/* --- block: image + list, alternating sides ------------------------------ */
+
+.block {
+  display: grid;
+  grid-template-columns: 1.12fr 1fr;
+  align-items: center;
+  column-gap: clamp(70px, 7vw, 110px);
+}
+
+.block + .block {
+  margin-top: clamp(160px, 15vw, 200px);
+}
+
+.blockReverse {
+  grid-template-columns: 1fr 1.12fr;
+}
+
+.blockReverse .media {
+  order: 2;
+}
+
+.media {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: 28px;
+  overflow: hidden;
+  background: #f3e9e0;
+}
+
+.mediaImg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mediaCaption {
+  position: absolute;
+  left: 28px;
+  bottom: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 200px;
+}
+
+.mediaCaptionRight {
+  left: auto;
+  right: 28px;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.mediaCaptionRule {
+  width: 28px;
+  height: 1px;
+}
+
+.mediaCaptionDark .mediaCaptionRule {
+  background: #c06f5f;
+}
+
+.mediaCaptionLight .mediaCaptionRule {
+  background: rgba(255, 249, 245, 0.85);
+}
+
+.mediaCaption p {
+  margin: 0;
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.35;
+}
+
+.mediaCaptionDark p {
+  color: #c06f5f;
+}
+
+.mediaCaptionLight p {
+  color: #fff9f5;
+}
+
+.body {
+  min-width: 0;
+}
+
+.categoryRule {
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: #c06f5f;
+  margin-bottom: 18px;
+}
+
+.category {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(56px, 6.5vw, 80px);
+  line-height: 1;
+  color: #171513;
+  margin-bottom: 20px;
+}
+
+.blockDesc {
+  max-width: 400px;
+  font-family: var(--font-sans);
+  font-size: clamp(16px, 1vw, 17px);
+  line-height: 1.65;
+  color: #5c5854;
+  margin-bottom: clamp(28px, 3vw, 40px);
+}
+
+/* --- editorial list: no cards, just type + thin rules + a circular
+   outline arrow ------------------------------------------------------- */
+
+.list {
+  border-top: 1px solid rgba(23, 21, 19, 0.1);
+}
+
+.listItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: clamp(20px, 2.2vw, 26px) 0;
+  border-bottom: 1px solid rgba(23, 21, 19, 0.1);
+}
+
+.itemMain {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.itemName {
+  font-family: var(--font-sans-semibold);
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #171513;
+}
+
+.itemDesc {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1.5;
+  color: #837d76;
+}
+
+.itemArrow {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid #c06f5f;
+  color: #c06f5f;
+  transition: background 0.3s var(--ease-soft), color 0.3s var(--ease-soft);
+}
+
+.listItem:hover .itemArrow {
+  background: #c06f5f;
+  color: #fff9f5;
+}
+
+.blockCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: clamp(24px, 3vw, 32px);
+  font-family: var(--font-sans);
+  font-size: var(--small);
+  color: #c06f5f;
+  padding-bottom: 2px;
+  border-bottom: 1px solid rgba(192, 111, 95, 0.4);
+  transition: border-color 0.3s var(--ease-soft), opacity 0.3s var(--ease-soft);
+}
+
+.blockCta:hover {
+  border-color: #c06f5f;
+  opacity: 0.75;
+}
+
+/* --- closing signature: a line of type, not a banner ------------------- */
+
+.signature {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(16px, 3vw, 32px);
+  margin-top: clamp(120px, 11vw, 160px);
+  text-align: center;
+}
+
+.signatureRule {
+  flex: 1 1 auto;
+  max-width: 120px;
+  height: 1px;
+  background: rgba(192, 111, 95, 0.4);
+}
+
+.signatureText {
+  flex: none;
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: clamp(20px, 2vw, 26px);
+  color: #c06f5f;
+  white-space: nowrap;
+}
+
+@media (max-width: 1180px) {
+  .title {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 900px) {
+  .block,
+  .blockReverse {
+    grid-template-columns: 1fr;
+    row-gap: 32px;
+  }
+  /* Faciais keeps image-first on mobile; Corporais keeps its desktop
+     mirroring (content, then image) rather than collapsing both blocks
+     to the same order — that alternation is deliberate per spec. */
+  .media {
+    aspect-ratio: 4 / 5;
+  }
+  .signature {
+    flex-direction: column;
+    gap: 14px;
+  }
+  .signatureRule {
+    width: 60px;
+    max-width: none;
+  }
+  .signatureText {
+    white-space: normal;
+  }
+}

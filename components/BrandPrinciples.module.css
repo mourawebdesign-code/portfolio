@@ -1,0 +1,326 @@
+/* ---------------------------------------------------------------------
+   Editorial rebuild: warm cream/peach background kept as-is. The photo
+   is a normal bounded rectangular photograph (4:5, object-fit: cover)
+   sitting in its own frame below the header — not a transparent cutout
+   to dissolve into the page, so no mask/fade is needed here. The four
+   principles stay merged into one interlocking 2x2 module on the right,
+   vertically centered on the photo's own center via flex alignment —
+   no cards, no grid gaps, no connector lines.
+   --------------------------------------------------------------------- */
+
+.section {
+  position: relative;
+  width: 100%;
+  background:
+    radial-gradient(ellipse at 72% 42%, rgba(255, 194, 145, 0.16) 0%, rgba(255, 194, 145, 0.07) 30%, transparent 58%),
+    radial-gradient(ellipse at 18% 70%, rgba(255, 107, 112, 0.07) 0%, transparent 48%),
+    linear-gradient(115deg, #fff9f5 0%, #fff7f1 48%, #fff4ea 100%);
+  padding: clamp(80px, 7vw, 130px) 0 clamp(60px, 5vw, 88px);
+  overflow-x: clip;
+}
+
+.section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: clamp(120px, 12vw, 200px);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 95, 109, 0.1) 0%,
+    rgba(255, 150, 120, 0.06) 45%,
+    rgba(255, 195, 113, 0.03) 75%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+.inner {
+  position: relative;
+  max-width: 1560px;
+  margin: 0 auto;
+  padding: 0 clamp(32px, 8vw, 140px);
+}
+
+/* --- header: two independent editorial blocks --------------------------- */
+
+.head {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  column-gap: clamp(24px, 5vw, 72px);
+  row-gap: 24px;
+  flex-wrap: wrap;
+}
+
+.headLeft {
+  max-width: 480px;
+  min-width: 0;
+}
+
+.headRight {
+  max-width: 240px;
+  min-width: 0;
+  padding-top: clamp(10px, 1vw, 16px);
+  text-align: right;
+  align-self: flex-start;
+  margin-left: auto;
+}
+
+.ruleTop {
+  width: 36px;
+  height: 2px;
+  background: #b96752;
+  margin-bottom: 12px;
+}
+
+.title {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(34px, 3vw, 44px);
+  line-height: 1;
+  color: #b96752;
+  margin: 0 0 8px;
+}
+
+.intro {
+  font-family: var(--font-sans);
+  font-size: clamp(15px, 0.9vw, 17px);
+  line-height: 1.45;
+  color: #444;
+  margin: 0;
+  max-width: 460px;
+}
+
+/* Small editorial statement — deliberately not a heading: no rule above
+   it, quieter neutral tone (not the title's terracotta), sized to read
+   as a complementary aside rather than a second entry point. */
+.concept {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(18px, 1.3vw, 21px);
+  line-height: 1.48;
+  color: #6b655d;
+  margin: 0;
+}
+
+/* --- composition: photo (left) + features (right), centered on a shared
+   vertical axis by the layout itself (flex align-items: center) — not by
+   an offset margin chosen to approximate it. --------------------------- */
+
+.composition {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(52px, 5vw, 82px);
+  margin-top: clamp(36px, 4vw, 56px);
+}
+
+/* A real bounded photograph (not a transparent cutout) — a 4:5 frame,
+   cover-cropped, softly rounded. Width is capped so it never grows
+   "gigante": at 600px wide the frame is ~750px tall, a confident
+   presence without dominating the features block beside it. */
+.photoStage {
+  position: relative;
+  flex: none;
+  width: clamp(360px, 43vw, 600px);
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: clamp(20px, 2vw, 32px);
+}
+
+.photoReveal {
+  position: absolute;
+  inset: 0;
+}
+
+.photoImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 42%;
+  display: block;
+}
+
+.featuresWrap {
+  flex: none;
+  display: flex;
+  justify-content: center;
+}
+
+/* --- features: one interlocking 2x2 module, not four cards --------------
+   Each cell's corner facing the module's own center is left square; the
+   other three are rounded. With the cells flush against each other that
+   makes the four squared corners meet as one continuous seam instead of
+   a gap — the "encaixe" the reference calls for, done in pure CSS grid +
+   border-radius, no masks/pseudo-elements needed for the shape itself. */
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "tl tr"
+    "bl br";
+  gap: clamp(3px, 0.4vw, 5px);
+  /* Height tracks the photo's own height (offset + this ≈ photo bottom,
+     see .featuresWrap) — taller than a minimal features block would be
+     on its own, achieved with roomier cell padding below rather than
+     bigger type, so it reads as generous, not stretched. */
+  width: clamp(420px, 32vw, 480px);
+  height: clamp(420px, 38vw, 560px);
+}
+
+.cell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: clamp(28px, 3.2vw, 44px) clamp(24px, 2.4vw, 32px);
+  min-width: 0;
+}
+
+/* Rounded only where a cell's own corner falls on one of the whole
+   module's four outer corners — every other corner (the center cross
+   and the two mid-edge points each cell has) stays square, so the four
+   quadrants read as one continuous rounded piece, not four separate
+   rounded cards pushed together. */
+.tl {
+  grid-area: tl;
+  border-radius: 26px 0 0 0;
+}
+
+.tr {
+  grid-area: tr;
+  border-radius: 0 26px 0 0;
+}
+
+.bl {
+  grid-area: bl;
+  border-radius: 0 0 0 26px;
+}
+
+.br {
+  grid-area: br;
+  border-radius: 0 0 26px 0;
+}
+
+.light {
+  background: #fff9f5;
+}
+
+.filled {
+  background: linear-gradient(135deg, #c06f5f 0%, #b96e5d 100%);
+}
+
+.cellIcon {
+  display: block;
+  width: 32px;
+  height: 32px;
+  margin-bottom: 12px;
+}
+
+.cellTitle {
+  margin: 0;
+  font-family: var(--font-sans-semibold);
+  font-weight: 600;
+  font-size: 14.5px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+
+.light .cellTitle {
+  color: #a85940;
+}
+
+.filled .cellTitle {
+  color: #fff9f5;
+}
+
+.cellText {
+  margin-top: 8px;
+  font-size: 14.5px;
+  line-height: 1.5;
+}
+
+.light .cellText {
+  color: #55524c;
+}
+
+.filled .cellText {
+  color: rgba(255, 249, 245, 0.9);
+}
+
+/* Tablet: still side-by-side, just tighter. align-items: center on
+   .composition (base rule) already keeps both centered on the shared
+   axis — nothing extra needed here. */
+@media (max-width: 1180px) {
+  .photoStage {
+    width: clamp(300px, 42vw, 420px);
+  }
+  .featuresGrid {
+    width: clamp(360px, 34vw, 420px);
+    height: clamp(360px, 40vw, 460px);
+  }
+}
+
+/* Below ~1080px there's no longer room for photo + features side by
+   side without crowding both — photo moves above, features keep their
+   2x2 interlock beneath it, centered horizontally instead. */
+@media (max-width: 1080px) {
+  .head {
+    max-width: none;
+  }
+  .headRight {
+    max-width: none;
+  }
+  .composition {
+    flex-direction: column;
+    align-items: center;
+  }
+  .photoStage {
+    width: min(480px, 82vw);
+  }
+  .featuresWrap {
+    width: 100%;
+  }
+  .featuresGrid {
+    width: min(480px, 88vw);
+    height: min(480px, 88vw);
+  }
+}
+
+@media (max-width: 420px) {
+  .featuresGrid {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, auto);
+    grid-template-areas:
+      "tl"
+      "tr"
+      "bl"
+      "br";
+    height: auto;
+    gap: 8px;
+  }
+  .tl,
+  .tr,
+  .bl,
+  .br {
+    border-radius: 20px;
+  }
+  .cell {
+    padding: 22px 24px;
+  }
+}

@@ -1,0 +1,336 @@
+.section {
+  position: relative;
+  width: 100%;
+  background: var(--section-bg);
+  padding: var(--space-section) 0 clamp(48px, 5.5vw, 80px);
+}
+
+.container {
+  width: 100%;
+  max-width: 1480px;
+  margin: 0 auto;
+  padding: 0 var(--inset-section);
+}
+
+/* --- header -------------------------------------------------------------- */
+
+.head {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto clamp(56px, 7vw, 96px);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s var(--ease-editorial), transform 0.8s var(--ease-editorial);
+}
+
+.head.shown {
+  opacity: 1;
+  transform: none;
+}
+
+.headLine {
+  display: block;
+  width: 40px;
+  height: 1px;
+  margin: 0 auto 18px;
+  background: var(--accent);
+  opacity: 0.5;
+}
+
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.title {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(32px, 2.4vw + 20px, 52px);
+  line-height: 1.12;
+  letter-spacing: -0.005em;
+  color: #171513;
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.titleItalic {
+  color: var(--accent);
+}
+
+.subtitle {
+  margin: 20px auto 0;
+  max-width: 480px;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--muted-2);
+}
+
+/* --- case list ------------------------------------------------------------ */
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.case {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(48px, 6vw, 96px);
+  align-items: center;
+}
+
+.list > div + div {
+  margin-top: 0;
+  padding-top: clamp(90px, 9vw, 130px);
+  border-top: 1px solid var(--border-soft);
+}
+
+/* --- media ----------------------------------------------------------------- */
+
+.mediaCol {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.85s var(--ease-editorial), transform 0.85s var(--ease-editorial);
+}
+
+.mediaCol.shown {
+  opacity: 1;
+  transform: none;
+}
+
+.sliderFrame {
+  aspect-ratio: 1.5 / 1;
+  border-radius: 20px;
+}
+
+/* --- content ---------------------------------------------------------------- */
+
+.contentCol {
+  max-width: 500px;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.85s var(--ease-editorial) 0.12s, transform 0.85s var(--ease-editorial) 0.12s;
+}
+
+.contentCol.shown {
+  opacity: 1;
+  transform: none;
+}
+
+.caseLabel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.caseLabel span:first-child {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.caseLabelRule {
+  width: 56px;
+  height: 1px;
+  background: var(--accent);
+  opacity: 0.4;
+}
+
+.procedure {
+  margin-top: 16px;
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(28px, 1.5vw + 20px, 44px);
+  line-height: 1.1;
+  color: #171513;
+}
+
+@media (min-width: 981px) {
+  .procedure {
+    white-space: nowrap;
+  }
+}
+
+.tagline {
+  margin-top: 14px;
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--muted);
+  max-width: 380px;
+}
+
+.infoRow {
+  display: flex;
+  gap: clamp(32px, 4vw, 56px);
+  margin-top: clamp(26px, 3vw, 34px);
+  padding-top: clamp(22px, 2.6vw, 28px);
+  border-top: 1px solid var(--border-soft);
+}
+
+.infoLabel {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(168, 121, 79, 0.85);
+  margin-bottom: 8px;
+}
+
+.infoText {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--muted);
+  max-width: 210px;
+}
+
+/* --- closing: editorial conversion CTA -----------------------------------
+   Deliberately not a card — a small decorative rule, a serif/italic
+   headline (same treatment as the section's own title), a short line of
+   copy, and a real button. Reuses the section's existing type and color
+   tokens so it reads as the section's own closing punctuation rather than
+   a bolted-on banner. */
+
+.closing {
+  max-width: 640px;
+  margin: clamp(64px, 7vw, 96px) auto 0;
+  text-align: center;
+}
+
+.closingLine {
+  display: block;
+  width: 40px;
+  height: 1px;
+  margin: 0 auto clamp(20px, 2.4vw, 28px);
+  background: var(--accent);
+  opacity: 0.5;
+}
+
+.closingTitle {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(28px, 2vw + 18px, 44px);
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+  color: #171513;
+}
+
+.closingAccent {
+  color: var(--accent);
+}
+
+.closingSubtitle {
+  margin: clamp(16px, 1.8vw, 20px) auto 0;
+  max-width: 440px;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--muted-2);
+}
+
+.closingCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: clamp(28px, 3vw, 36px) auto 0;
+  padding: 16px 36px;
+  min-height: 52px;
+  border-radius: 100px;
+  background: var(--button);
+  color: var(--card-peach);
+  font-family: var(--font-sans-semibold);
+  font-weight: 600;
+  font-size: var(--small);
+  letter-spacing: 0.01em;
+  transition: background 0.3s var(--ease-soft);
+}
+
+.closingArrow {
+  transition: transform 0.3s var(--ease-soft);
+}
+
+.closingCta:hover {
+  background: var(--accent);
+}
+
+.closingCta:hover .closingArrow {
+  transform: translateX(3px);
+}
+
+/* --- tablet -------------------------------------------------------------------- */
+
+@media (max-width: 980px) {
+  .case {
+    gap: clamp(32px, 5vw, 48px);
+  }
+  .contentCol {
+    max-width: none;
+  }
+  .procedure {
+    font-size: clamp(28px, 3vw, 38px);
+  }
+}
+
+/* --- mobile ---------------------------------------------------------------------
+   Image always leads, content always follows — never side by side. */
+@media (max-width: 760px) {
+  .case {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .mediaCol {
+    order: 1;
+  }
+  .contentCol {
+    order: 2;
+  }
+
+  .sliderFrame {
+    aspect-ratio: 4 / 3;
+    border-radius: 16px;
+  }
+
+  .procedure {
+    font-size: clamp(26px, 6.5vw, 34px);
+  }
+
+  .tagline {
+    max-width: none;
+  }
+
+  .infoRow {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .infoText {
+    max-width: none;
+  }
+
+  .closing {
+    margin-top: clamp(48px, 12vw, 64px);
+  }
+  .closingTitle {
+    font-size: clamp(26px, 6.5vw, 34px);
+  }
+  .closingCta {
+    width: 100%;
+    max-width: 340px;
+    justify-content: center;
+  }
+}

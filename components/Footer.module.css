@@ -1,0 +1,199 @@
+.footer {
+  position: relative;
+  width: 100%;
+  /* section-bg, not card-peach: Location right above shares card-peach,
+     so the footer needs its own tone to read as the page's closing
+     chapter instead of fusing into Location's seam. */
+  background: var(--section-bg);
+  border-top: 1px solid var(--border-soft);
+  padding-top: clamp(64px, 7vw, 96px);
+}
+
+.inner {
+  width: calc(100% - 96px);
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+/* --- top: brand + two link columns --------------------------------------- */
+
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: clamp(48px, 6vw, 96px);
+  padding-bottom: clamp(56px, 7vw, 96px);
+}
+
+.brandBlock {
+  flex: 1 1 320px;
+  max-width: 420px;
+}
+
+.brandName {
+  font-family: var(--font-sans-semibold);
+  font-weight: 600;
+  font-size: clamp(20px, 1vw + 15px, 24px);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.tagline {
+  margin-top: clamp(16px, 1.8vw, 22px);
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: clamp(19px, 1vw + 14px, 24px);
+  line-height: 1.32;
+  color: var(--muted);
+}
+
+.taglineAccent {
+  color: var(--accent);
+}
+
+.city {
+  margin-top: clamp(18px, 2vw, 24px);
+  font-family: var(--font-sans);
+  font-size: var(--small);
+  letter-spacing: 0.02em;
+  color: var(--muted-3);
+}
+
+.navCols {
+  display: flex;
+  gap: clamp(56px, 7vw, 120px);
+  flex: none;
+}
+
+.navCol {
+  display: flex;
+  flex-direction: column;
+  min-width: 140px;
+}
+
+.colLabel {
+  font-family: var(--font-sans-semibold);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted-3);
+  margin-bottom: clamp(16px, 1.8vw, 22px);
+}
+
+.navLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  font-family: var(--font-sans);
+  font-size: var(--body);
+  color: var(--text);
+  padding: 7px 0;
+  transition: color 0.3s var(--ease-soft);
+}
+
+.navLink:hover {
+  color: var(--accent);
+}
+
+.navArrow {
+  font-size: 0.85em;
+  transition: transform 0.3s var(--ease-soft);
+}
+
+.navLink:hover .navArrow {
+  transform: translate(2px, -2px);
+}
+
+/* --- wordmark: monumental, low-contrast graphic element ------------------- */
+
+.wordmark {
+  width: 100%;
+  overflow: hidden;
+  line-height: 1;
+}
+
+.wordmarkText {
+  display: block;
+  width: fit-content;
+  font-family: var(--font-sans-semibold);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+  color: rgba(168, 121, 79, 0.1);
+  white-space: nowrap;
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 62%, transparent 94%);
+  mask-image: linear-gradient(to bottom, black 0%, black 62%, transparent 94%);
+}
+
+/* --- legal bar -------------------------------------------------------------- */
+
+.legal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: clamp(18px, 2vw, 24px) 0;
+  margin-top: clamp(20px, 2.4vw, 32px);
+  border-top: 1px solid var(--border-soft);
+  font-family: var(--font-sans);
+  font-size: var(--micro);
+  color: var(--muted-3);
+}
+
+.legalLinks {
+  display: flex;
+  gap: 20px;
+}
+
+.legalLink {
+  color: var(--muted-3);
+  transition: color 0.3s var(--ease-soft);
+}
+
+.legalLink:hover {
+  color: var(--text);
+}
+
+/* --- tablet ------------------------------------------------------------------ */
+
+@media (max-width: 900px) {
+  .navCols {
+    gap: clamp(40px, 6vw, 64px);
+  }
+}
+
+/* --- mobile: recomposed, not compressed ------------------------------------- */
+
+@media (max-width: 640px) {
+  .footer {
+    padding-top: clamp(56px, 14vw, 72px);
+  }
+  .inner {
+    width: calc(100% - 48px);
+  }
+  .top {
+    flex-direction: column;
+    gap: clamp(40px, 10vw, 56px);
+    padding-bottom: clamp(48px, 12vw, 64px);
+  }
+  .brandBlock {
+    max-width: none;
+  }
+  .navCols {
+    flex-direction: column;
+    gap: clamp(32px, 8vw, 44px);
+  }
+  .navCol {
+    min-width: 0;
+  }
+  .legal {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}

@@ -1,0 +1,234 @@
+/* Layer 0 — background. Height is a floor, not a cap: the Hero is allowed
+   to grow taller than the viewport so the photo below can render at its
+   full, uncropped height. Horizontal overflow (the photo runs wider than
+   the viewport on purpose) is clipped; vertical overflow never is. */
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+  min-height: 100dvh;
+  background: #ff5f6d;
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+
+/* `absolute` + `inset: 0` against `.hero` itself (not `fixed` to the
+   viewport) so it stretches across the Hero's own full height — which can
+   run taller than one viewport on mobile/tablet, where the photo forces
+   the section to grow — and scrolls away with it, rather than staying
+   pinned behind the sections that follow. */
+.heroBackground {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Layer 1 — content: AURÉA / description / CTA. `padding-top` alone reads
+   as "centered in the upper black area" — it's the ONLY thing separating
+   this group from the header, so it can be generous without pushing the
+   photo down with it: the photo's own distance from the CTA is controlled
+   independently below (`.visualWrapper`'s `margin-top`), not by leftover
+   space in a centering box. That's what keeps the two gaps decoupled: this
+   one can stay big while that one stays small. */
+.content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: clamp(180px, 26vh, 340px) clamp(20px, 5vw, 80px) 0;
+  pointer-events: none;
+}
+
+.content > * {
+  pointer-events: auto;
+}
+
+/* Shrink-wraps to the headline's own rendered width so AnimatedText's
+   underline (width:100% of its own wrapper) matches the word instead of
+   stretching across the whole content column. */
+.animatedRoot {
+  width: fit-content;
+  margin: 0 auto clamp(22px, 3vw, 36px);
+  color: #fff;
+}
+
+.wordmark {
+  font-family: var(--font-sans-semibold);
+  font-weight: 600;
+  font-size: clamp(64px, 9.5vw, 148px);
+  line-height: 1;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.wordmarkUnderline {
+  height: 16px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.description {
+  max-width: min(480px, 86vw);
+  font-family: var(--font-sans);
+  font-size: var(--body-lg);
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.ctaWrap {
+  margin-top: clamp(32px, 4.2vw, 48px);
+}
+
+/* Same timing/easing as Reveal's own "tween" preset, kept local since this
+   element is driven by a real completion signal (see useCtaReady in
+   Hero.tsx) rather than Reveal's fixed-delay timer. */
+.ctaReveal {
+  transition:
+    opacity 0.4s cubic-bezier(0.44, 0, 0.56, 1),
+    transform 0.4s cubic-bezier(0.44, 0, 0.56, 1);
+}
+
+/* Layer 2 — visual: the photo, full-bleed and whole. The asset itself has a
+   large pure-black margin above the lips/nose, so a *positive* margin-top
+   here would leave a much bigger visible gap than it looks like on paper.
+   `margin-top` is deliberately negative: it pulls the image's own black
+   header space up behind the content block (content stays on top — it has
+   the higher z-index) so the visible skin, not the image's bounding box,
+   is what sits close under the CTA. `width` + `left` are the approved
+   horizontal composition and are untouched by this vertical-only change.
+   Height is never set directly — it follows from `aspect-ratio`, so the
+   photo always renders at its full, uncropped size. */
+.visualWrapper {
+  --conn: clamp(44px, 4.17vw, 92px);
+  position: relative;
+  z-index: 1;
+  left: -2vw;
+  width: 102vw;
+  aspect-ratio: 1672 / 941;
+  margin-top: clamp(-280px, -20vh, -190px);
+}
+
+.photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --- editorial annotations --------------------------------------------
+   Purely additive layer on top of the approved photo: pills + thin curved
+   connectors + a small dot, all positioned in % of the photo's own box so
+   they stay anchored to the same facial landmarks at any scale. */
+
+/* The pill's bottom-left corner sits exactly on its anchor point, so the
+   connector below can hang off the pill itself rather than off the photo. */
+.annotation {
+  position: absolute;
+  z-index: 2;
+  left: var(--ax);
+  top: calc(var(--ay) + var(--ann-shift, 0%));
+  translate: 0 -100%;
+  display: flex;
+}
+
+/* The reveal wrapper has to be a flex container too: as a plain block it
+   would add inline leading around the pill, making this box taller than
+   the pill and pushing the pill (and the connector hanging off it) a few
+   px below the anchor the coordinates were solved for. */
+.annotation > * {
+  display: flex;
+}
+
+/* Sized (inline) off `--conn` and shifted so its curve starts right under
+   the pill. The box scales uniformly — never stretched — so the stroke
+   stays a true hairline and the dash driving the draw-in can never show as
+   segments. `--conn` (set on .visualWrapper) is vw-based so the curve
+   tracks the photo's scale and its tip keeps landing on the same spot of
+   the mouth at any width. */
+.connector {
+  position: absolute;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.connectorPath {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.7);
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.connectorDot {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.85);
+  stroke-width: 1.2;
+}
+
+.annotationLabel {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 15px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 100px;
+  background: rgba(10, 8, 6, 0.4);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+/* Desktop only: the Hero is capped to exactly one viewport tall and clips
+   whatever the photo runs past that — on wide screens the composition
+   reads better as "one full screen, then the next section" than as a Hero
+   that keeps growing to show the photo's full, uncropped height (which is
+   still what mobile/tablet below do, since they never asked for this). */
+@media (min-width: 901px) {
+  .hero {
+    max-height: 100vh;
+    max-height: 100svh;
+    max-height: 100dvh;
+    overflow-y: hidden;
+  }
+}
+
+/* Short desktop windows: the photo rides higher relative to the copy, so
+   the annotations ride down with it to keep clear of the CTA. The
+   connector hangs off the pill, so the curve's tip travels along and stays
+   on the same part of the mouth. */
+@media (min-width: 901px) and (max-height: 800px) {
+  .visualWrapper {
+    --ann-shift: 1%;
+  }
+}
+
+/* Portrait/tablet and phones: the approved horizontal composition (width,
+   left) stays exactly as-is — only the vertical gap eases off a little
+   since these viewports are already naturally tall. */
+@media (max-width: 900px) {
+  .visualWrapper {
+    --conn: clamp(46px, 12vw, 70px);
+    left: -3vw;
+    width: 108vw;
+    margin-top: clamp(-85px, -6vh, -40px);
+  }
+  .content {
+    padding-top: clamp(150px, 28vh, 300px);
+  }
+}
+
+@media (max-width: 520px) {
+  .visualWrapper {
+    left: -2vw;
+    width: 118vw;
+    margin-top: clamp(-40px, -3.5vh, -14px);
+  }
+}

@@ -1,0 +1,179 @@
+@import "./fonts.css";
+
+/* ---------------------------------------------------------------
+   Design tokens — fluid scale, clamp()-driven, no viewport-locked
+   pixel values. Every section reads from this table so the whole
+   site can be retuned from one place.
+   --------------------------------------------------------------- */
+:root {
+  --background: #ffffff;
+  --text: #16140f;
+  --muted: #5e5b52;
+  --muted-2: #6c6a61;
+  --muted-3: #8c897d;
+  --accent: #a8794f;
+  --card: #f8f2ed;
+  --card-peach: #fef6ef;
+  --card-pink: #f3e9e0;
+  --section-bg: #f6f3ee;
+  --section-bg-2: #efe9e0;
+  --border: rgba(22, 20, 15, 0.16);
+  --border-soft: rgba(22, 20, 15, 0.08);
+  --button: #16140f;
+  --footer: #0c0b09;
+
+  --font-sans: "PP Mori Regular", "PP Mori Regular Placeholder", sans-serif;
+  --font-sans-semibold: "PP Mori SemiBold", "PP Mori SemiBold Placeholder", sans-serif;
+  --font-editorial: "PP Editorial New Italic", "PP Editorial New Italic Placeholder", serif;
+
+  /* Horizontal insets — fluid, no breakpoint jump needed. */
+  --inset-nav: clamp(20px, 4vw, 58px);
+  --inset-hero: clamp(20px, 3.7vw, 53px);
+  --inset-editorial: clamp(20px, 3.7vw, 53px);
+  --inset-section: clamp(20px, 4vw, 58px);
+  --inset-footer: clamp(20px, 4vw, 58px);
+
+  /* Section container */
+  --container-max: 1360px;
+
+  /* --- Fluid type scale --------------------------------------- */
+  --display: clamp(52px, 11vw + 4px, 200px);
+  --h1: clamp(38px, 5.4vw + 6px, 96px);
+  --h2: clamp(30px, 3.2vw + 8px, 54px);
+  --h3: clamp(22px, 1.4vw + 12px, 32px);
+  --editorial-lg: clamp(30px, 4vw + 4px, 72px);
+  --editorial-md: clamp(24px, 2vw + 10px, 44px);
+  --body-lg: clamp(16px, 0.6vw + 12px, 20px);
+  --body: clamp(14.5px, 0.25vw + 13px, 16px);
+  --small: clamp(13px, 0.15vw + 12px, 14px);
+  --micro: clamp(11px, 0.1vw + 10.5px, 13px);
+
+  /* legacy aliases kept so nothing silently breaks mid-refactor */
+  --fs-h2: var(--h2);
+  --lh-h2: 1.04;
+  --fs-italic: var(--editorial-lg);
+  --lh-italic: 1.04;
+  --fs-display: var(--display);
+  --lh-display: 0.94;
+  --fs-brand: var(--h3);
+  --lh-brand: 1.2;
+  --fs-price: var(--editorial-md);
+  --lh-price: 1.2;
+  --fs-svc-kicker: var(--editorial-md);
+  --lh-svc-kicker: 1.05;
+  --fs-body: var(--body);
+  --lh-body: 1.5;
+  --fs-item: var(--body-lg);
+  --lh-item: 1.4;
+  --fs-plan: var(--body);
+  --lh-plan: 1.4;
+  --fs-foot-label: var(--small);
+  --lh-foot-label: 1.2;
+
+  /* --- Spacing tokens ------------------------------------------ */
+  --space-section: clamp(72px, 9vw, 160px);
+  --space-section-sm: clamp(56px, 6vw, 112px);
+  --space-block: clamp(32px, 4vw, 72px);
+  --space-element: clamp(16px, 1.6vw, 28px);
+
+  --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.44, 0, 0.56, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--background);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+figure {
+  margin: 0;
+  font-weight: inherit;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Shared container: every section that isn't intentionally full-bleed
+   should sit inside this so the grid stays consistent site-wide. */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--inset-section);
+}
+
+/* ---------------------------------------------------------------
+   Minimal Tailwind-equivalent utilities — this project has no
+   Tailwind build step, but AnimatedText.tsx (a fixed, do-not-edit
+   component) is authored against these exact utility class names.
+   Kept intentionally tiny: only what that component actually uses.
+   --------------------------------------------------------------- */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.gap-2 { gap: 0.5rem; }
+.relative { position: relative; }
+.absolute { position: absolute; }
+.left-0 { left: 0; }
+.-bottom-4 { bottom: -1rem; }
+.text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+.font-bold { font-weight: 700; }
+.text-center { text-align: center; }
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

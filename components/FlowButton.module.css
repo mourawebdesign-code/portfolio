@@ -1,0 +1,108 @@
+/* Ported from a Tailwind reference component — colors inverted for use on
+   the Hero's dark background (the source design assumes a light bg with a
+   dark pill; here the pill starts light-on-transparent and fills white on
+   hover, text flipping to dark) — everything else (timing, easing, the
+   arrow swap, the expanding circle) is kept faithful to the original. */
+
+.flowBtn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  overflow: hidden;
+  border-radius: 100px;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  background: transparent;
+  padding: 12px 32px;
+  font-family: var(--font-sans-semibold);
+  font-weight: 600;
+  font-size: var(--small);
+  color: #fff;
+  cursor: pointer;
+  transition:
+    border-color 0.6s cubic-bezier(0.23, 1, 0.32, 1),
+    color 0.6s cubic-bezier(0.23, 1, 0.32, 1),
+    border-radius 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.flowBtn:hover,
+.flowBtn.active {
+  border-color: transparent;
+  border-radius: 12px;
+  color: #16140f;
+}
+
+.flowBtn:active {
+  transform: scale(0.95);
+}
+
+.arrow {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  z-index: 9;
+  stroke: #fff;
+  fill: none;
+  transition:
+    left 0.8s cubic-bezier(0.34, 1.56, 0.64, 1),
+    right 0.8s cubic-bezier(0.34, 1.56, 0.64, 1),
+    stroke 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.flowBtn:hover .arrow,
+.flowBtn.active .arrow {
+  stroke: #16140f;
+}
+
+.arrowLeft {
+  left: -25%;
+}
+
+.flowBtn:hover .arrowLeft,
+.flowBtn.active .arrowLeft {
+  left: 16px;
+}
+
+.arrowRight {
+  right: 16px;
+}
+
+.flowBtn:hover .arrowRight,
+.flowBtn.active .arrowRight {
+  right: -25%;
+}
+
+.text {
+  position: relative;
+  z-index: 1;
+  transform: translateX(-12px);
+  transition: transform 0.8s ease-out;
+}
+
+.flowBtn:hover .text,
+.flowBtn.active .text {
+  transform: translateX(12px);
+}
+
+.circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  width: 16px;
+  height: 16px;
+  background: #fff;
+  border-radius: 50%;
+  opacity: 0;
+  transition:
+    width 0.8s cubic-bezier(0.19, 1, 0.22, 1),
+    height 0.8s cubic-bezier(0.19, 1, 0.22, 1),
+    opacity 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.flowBtn:hover .circle,
+.flowBtn.active .circle {
+  width: 220px;
+  height: 220px;
+  opacity: 1;
+}

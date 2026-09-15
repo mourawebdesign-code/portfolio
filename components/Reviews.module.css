@@ -1,0 +1,149 @@
+.section {
+  position: relative;
+  width: 100%;
+  /* card-peach, not section-bg: Results (before) and Experience (after)
+     both sit on section-bg, so this section needs to read as its own
+     chapter rather than fusing into either neighbor. Padding is also its
+     own explicit value rather than the shared --space-section token,
+     which could run up to 160px on a side and, stacked against a
+     neighbor's own padding, left an oversized dead zone at both seams. */
+  background: var(--card-peach);
+  padding: clamp(56px, 6vw, 96px) 0;
+  overflow: clip;
+}
+
+.inner {
+  text-align: center;
+}
+
+.kicker {
+  font-family: var(--font-sans-semibold);
+  font-weight: 600;
+  font-size: var(--h2);
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.title {
+  margin-top: 6px;
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: var(--editorial-lg);
+  color: var(--text);
+}
+
+/* --- marquee ------------------------------------------------------------- */
+
+.marquee {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: clamp(16px, 2vw, 24px);
+  margin-top: clamp(48px, 6vw, 72px);
+  max-height: clamp(560px, 58vw, 720px);
+  overflow: hidden;
+  /* Soft top/bottom fade instead of a hard clip on the scrolling cards. */
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent);
+}
+
+.column {
+  flex: none;
+  width: min(340px, 84vw);
+}
+
+.hideMd {
+  display: none;
+}
+
+.hideLg {
+  display: none;
+}
+
+@media (min-width: 760px) {
+  .hideMd {
+    display: block;
+  }
+}
+
+@media (min-width: 1100px) {
+  .hideLg {
+    display: block;
+  }
+}
+
+.columnList {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(18px, 2vw, 24px);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+/* --- card ------------------------------------------------------------------ */
+
+.card {
+  flex: none;
+  padding: clamp(24px, 2.4vw, 32px);
+  border-radius: 20px;
+  background: var(--card-peach);
+  border: 1px solid var(--border-soft);
+  text-align: left;
+}
+
+.blockquote {
+  margin: 0;
+}
+
+.quote {
+  margin: 0;
+  font-size: var(--body);
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: clamp(18px, 2vw, 24px);
+}
+
+.avatar {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff9f5;
+  font-family: var(--font-sans-semibold);
+  font-weight: 600;
+  font-size: var(--small);
+}
+
+.author {
+  display: block;
+  font-family: var(--font-sans-semibold);
+  font-weight: 600;
+  font-style: normal;
+  font-size: var(--small);
+  color: var(--text);
+}
+
+.detail {
+  margin: 2px 0 0;
+  font-size: var(--micro);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+@media (max-width: 640px) {
+  .marquee {
+    max-height: 68vh;
+  }
+}
