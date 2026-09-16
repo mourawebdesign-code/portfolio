@@ -74,11 +74,6 @@ function Case({
       ref={bodyRef}
       className={`${styles.contentCol} ${bodyShown ? styles.shown : ""}`}
     >
-      <div className={styles.caseLabel}>
-        <span>Caso real</span>
-        <span className={styles.caseLabelRule} aria-hidden="true" />
-      </div>
-
       <h3 className={styles.procedure}>{data.procedure}</h3>
       <p className={styles.tagline}>{data.tagline}</p>
 
@@ -122,7 +117,8 @@ export default function Results() {
           <span className={styles.headLine} aria-hidden="true" />
           <p className={styles.eyebrow}>Resultados</p>
           <h2 className={styles.title}>
-            Casos reais, <span className={styles.titleItalic}>resultados naturais.</span>
+            Resultados pensados para{" "}
+            <span className={styles.titleItalic}>preservar sua naturalidade.</span>
           </h2>
           <p className={styles.subtitle}>
             Mais do que mudanças, mostramos escolhas bem feitas. Resultados que

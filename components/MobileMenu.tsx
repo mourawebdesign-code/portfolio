@@ -28,7 +28,7 @@ export default function MobileMenu({
       aria-hidden={!open}
     >
       <div className={styles.top}>
-        <span className={styles.wordmark}>AURÉA</span>
+        <span className={styles.wordmark}>LUMÉA</span>
         <button className={styles.close} aria-label="Close menu" onClick={onClose}>
           <i />
           <i />

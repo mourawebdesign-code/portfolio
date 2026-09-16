@@ -60,7 +60,7 @@ export default function Location() {
           <Reveal trigger="scroll" distance={10} delay={0.15} className={styles.infoRow}>
             <div>
               <p className={styles.label}>Endereço</p>
-              <p className={styles.brand}>AURÉA</p>
+              <p className={styles.brand}>LUMÉA</p>
               <p className={styles.value}>
                 Rua das Palmeiras, 482
                 <br />
@@ -98,7 +98,7 @@ export default function Location() {
                 style={{ border: 0 }}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Localização da AURÉA no Google Maps"
+                title="Localização da LUMÉA no Google Maps"
               />
             </div>
           </Reveal>

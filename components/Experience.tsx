@@ -56,7 +56,7 @@ type Slide = {
 const SLIDES: Slide[] = [
   {
     src: "/organic/experiencia/momento-equipe.png",
-    alt: "Recepção da AURÉA: equipe recebendo uma paciente com atenção e cordialidade",
+    alt: "Recepção da LUMÉA: equipe recebendo uma paciente com atenção e cordialidade",
     objectPosition: "center 20%",
   },
   {
@@ -218,7 +218,7 @@ function Carousel() {
           onPointerCancel={endDrag}
           role="group"
           aria-roledescription="carousel"
-          aria-label="Fotografias da experiência AURÉA"
+          aria-label="Fotografias da experiência LUMÉA"
         >
           <div className={styles.track}>
             {SLIDES.map((slide, i) => (

@@ -67,18 +67,17 @@ export default function Specialist() {
             <div className={styles.bio}>
               <Reveal trigger="scroll" distance={12} delay={0.14}>
                 <p>
-                  Há mais de uma década, Helena Valença constrói sua
-                  trajetória na estética a partir do estudo das proporções,
-                  da anatomia facial e da individualidade de cada paciente.
+                  Biomédica Esteta com atuação voltada à harmonização facial,
+                  Dra. Helena Valença trabalha com uma abordagem individual,
+                  baseada na análise das proporções e características de cada
+                  rosto.
                 </p>
               </Reveal>
               <Reveal trigger="scroll" distance={12} delay={0.2}>
                 <p>
-                  Formada em Biomedicina e pós-graduada em Biomedicina
-                  Estética, aprofundou sua atuação em harmonização facial e
-                  técnicas avançadas de rejuvenescimento. À frente da AURÉA,
-                  reúne essa trajetória em uma prática marcada por técnica
-                  apurada, olhar individual e escolhas feitas com intenção.
+                  Seu objetivo é indicar procedimentos de forma cuidadosa e
+                  personalizada, respeitando a expressão, a identidade e a
+                  naturalidade de cada paciente.
                 </p>
               </Reveal>
             </div>

@@ -9,7 +9,7 @@ export default function SocialGallery() {
     <section className={styles.section}>
       <div className={`container ${styles.head}`}>
         <h2 className={styles.kicker}>Siga a clínica</h2>
-        <h2 className={styles.handle}>@aurea.estetica</h2>
+        <h2 className={styles.handle}>@lumea.estetica</h2>
       </div>
 
       <div className={styles.viewport}>
