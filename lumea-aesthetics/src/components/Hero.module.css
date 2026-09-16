@@ -1,0 +1,190 @@
+/* Reprodução 1:1 do Figma "Aurea" (node 51:3, canvas de referência
+   2252x1080). Aspect-ratio travado nesse mesmo canvas: cada filho usa
+   left/top/width/height em % (derivados de px-figma/2252 ou /1080) e
+   font-size/letter-spacing em vw (derivados de px-figma/2252*100), com
+   clamp() só para não quebrar entre 1024px e o mínimo desktop — a section
+   inteira escala proporcionalmente, então as relações do design nunca
+   mudam. Abaixo de 1024px não existe frame no Figma para essa largura:
+   o bloco mobile reorganiza os mesmos elementos em fluxo normal. */
+.section{
+  position:relative;
+  width:100%;
+  background:#fff;
+  /* Respiro fixo pra navbar (fixed/overlay) — o Figma não reserva esse
+     espaço porque o frame dele não inclui a navbar. */
+  padding-top:clamp(100px,7.4vw,150px);
+}
+.canvas{
+  position:relative;
+  aspect-ratio:2252/1080;
+  width:100%;
+  overflow:hidden;
+}
+
+/* Sem position própria em desktop de propósito — ver comentário no JSX. */
+.tailRow{display:contents;}
+
+.gradientBg{
+  position:absolute;inset:0;z-index:0;
+  background-image:url(/images/lumea/hero/gradient-bg.svg);
+  background-size:100% 100%;
+  background-repeat:no-repeat;
+}
+
+/* "EXCESSOS" — palavra gigante, pintada ATRÁS da doutora (fica parcialmente
+   coberta por ela, como no Figma: a foto tem z-index maior). */
+.highlightWord{
+  position:absolute;z-index:1;
+  left:50%;top:24.537%;
+  transform:translateX(-50%);
+  margin:0;
+  font-family:var(--font-hero-title,var(--font-grotesk));
+  font-weight:800;
+  text-transform:uppercase;
+  white-space:nowrap;
+  /* Valor original extraído do Figma (278.735px / 2252 de largura de
+     referência = 12.377vw). A recalibração anterior para 15.5vw partiu de
+     uma medição errada: a fonte "Inter" real nunca tinha carregado no
+     dev server (fallback silencioso do next/font), então a largura
+     medida era de uma fonte substituta, não da Inter de verdade. Com a
+     fonte real carregando, o valor do Figma volta a bater. */
+  font-size:clamp(64px,14.5vw,326px);
+  line-height:0.94;
+  letter-spacing:-0.04em;
+  color:var(--violet);
+}
+
+/* HARMONIZAÇÃO, FACIAL e SEM compartilham font-family/weight/size/
+   line-height/letter-spacing — só a posição muda.
+   ------------------------------------------------------------------
+   Tentativa revertida: uma versão anterior alinhava o início de SEM ao
+   fim renderizado de HARMONIZAÇÃO via CSS Grid (coluna compartilhada).
+   Isso quebrou a composição — HARMONIZAÇÃO é bem mais larga que a região
+   "FACIAL + cabeça + SEM", então esse alinhamento jogava SEM muito além
+   da cabeça, isolado à direita. A referência real é a CABEÇA da doutora
+   (fixa, nunca muda), não a largura de HARMONIZAÇÃO — por isso FACIAL e
+   SEM voltam a ser posicionados cada um com seu próprio left%, calibrado
+   contra a posição da cabeça (ver .portrait), como no original. */
+.titleH1,.titleFacial,.titleTail{
+  position:absolute;
+  margin:0;
+  font-family:var(--font-hero-title,var(--font-grotesk));
+  font-weight:800;
+  text-transform:uppercase;
+  white-space:nowrap;
+  font-size:clamp(30px,4.77vw,96px);
+  line-height:0.94;
+  letter-spacing:-0.04em;
+  color:var(--ink);
+}
+/* left: valor do Figma pro frame 1920px, 550/1920=28.646%. */
+.titleH1{z-index:2;left:28.646%;top:7.778%;}
+/* Mesma left de HARMONIZAÇÃO (alinhamento de borda esquerda) e mesmo top
+   de SEM (garante baseline idêntica entre as duas palavras da linha 2). */
+.titleFacial{z-index:2;left:28.646%;top:16.111%;}
+.titleTail{
+  z-index:3;
+  /* Medido contra a cabeça real (não contra HARMONIZAÇÃO): o objetivo é
+     SEM nascer rente à lateral direita da cabeça, não a X% de distância
+     de uma palavra de outra linha que nem aparece ao lado dela. */
+  left:56.5%;top:16.111%;
+}
+
+.portrait{
+  position:absolute;z-index:4;
+  left:36.812%;top:13.148%;
+  width:26.349%;height:91.667%;
+  pointer-events:none;
+}
+.portraitImg{object-fit:cover;object-position:top center;}
+
+/* Glow branco desfocado atrás do rodapé da composição — mesma estrutura do
+   Figma: caixa "visível" (.glow) + imagem sobrando pra fora dela
+   (.glowInner com inset negativo) pra acomodar o blur sem cortar. */
+.glow{
+  position:absolute;z-index:5;
+  left:-12.611%;top:74.722%;
+  width:106.217%;height:53.148%;
+  pointer-events:none;
+}
+.glowInner{position:absolute;inset:-35.07% -8.42%;}
+.glowImg{object-fit:contain;}
+
+.footer{
+  position:absolute;z-index:6;
+  left:50%;top:81.204%;width:max(460px,26.288%);
+  transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;
+}
+.body{
+  margin:0;text-align:center;
+  font-family:var(--font-grotesk);font-weight:500;
+  font-size:clamp(14px,0.8437vw,19px);
+  line-height:1.5;
+  color:var(--ink);
+}
+
+.actions{
+  margin-top:clamp(14px,2.25vw,50px);
+  display:flex;align-items:center;gap:28px;white-space:nowrap;
+}
+.primary{
+  padding-inline:clamp(22px,1.51vw,34px);height:clamp(40px,4.6vh,54px);
+  font-family:var(--font-display),var(--font-grotesk);
+  font-size:clamp(11px,0.555vw,12.5px);letter-spacing:0.09em;
+  transition:background-color .3s ease,transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s ease;
+}
+.primary:hover{transform:translateY(-2px);box-shadow:0 14px 28px -12px rgba(20,18,65,.35);}
+.ghost{
+  font-family:var(--font-display),var(--font-grotesk);
+  font-size:clamp(13px,0.666vw,15px);
+}
+
+@media (max-width:1023px){
+  /* Sem frame próprio no Figma pra essa largura — os mesmos textos e a
+     mesma foto voltam ao fluxo normal, empilhados. */
+  .section{padding-top:0;}
+  .canvas{
+    aspect-ratio:auto;height:auto;min-height:0;
+    display:flex;flex-direction:column;align-items:center;text-align:center;
+    padding:120px var(--gutter) 56px;
+  }
+  .gradientBg{background-position:center;}
+
+  .titleH1,.titleFacial,.titleTail,.highlightWord{
+    position:static;left:auto;top:auto;transform:none;
+    width:auto;white-space:normal;
+  }
+  .titleH1{order:1;font-size:clamp(32px,8vw,44px);}
+  .titleFacial{order:2;font-size:clamp(32px,8vw,44px);margin-top:2px;}
+
+  /* .tailRow deixa de ser display:contents e vira o 3º item da coluna,
+     juntando "Sem" + "EXCESSOS" numa linha (nessa ordem). */
+  .tailRow{
+    display:flex;order:3;align-items:baseline;justify-content:center;
+    gap:10px;flex-wrap:wrap;margin-top:4px;
+  }
+  .titleTail{font-size:clamp(32px,8vw,44px);}
+  .highlightWord{font-size:clamp(48px,15vw,88px);}
+
+  .footer{
+    position:static;left:auto;top:auto;transform:none;
+    width:100%;max-width:480px;order:4;margin-top:24px;
+  }
+  .body{font-size:16px;}
+  .actions{margin-top:28px;flex-wrap:wrap;justify-content:center;}
+  .portrait{
+    position:relative;z-index:1;left:auto;top:auto;
+    order:5;margin-top:32px;
+    width:min(78vw,340px);height:auto;aspect-ratio:971/1620;
+  }
+  .glow{display:none;}
+}
+@media (max-width:767px){
+  .canvas{padding-top:100px;}
+  .titleH1,.titleFacial,.titleTail{font-size:clamp(28px,9vw,36px);}
+  .highlightWord{font-size:clamp(40px,17vw,60px);}
+}
+@media (prefers-reduced-motion:reduce){
+  .titleH1,.titleFacial,.titleTail,.highlightWord,.body,.actions,.portrait{animation:none;}
+}

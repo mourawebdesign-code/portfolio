@@ -1,0 +1,49 @@
+.section{padding:calc(var(--section-space) / 2) 0;background:var(--page);}
+.head{
+  max-width:var(--container);margin-inline:auto;padding-inline:var(--gutter);
+  opacity:0;transform:translateY(18px);
+  transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1);
+}
+.head.visible{opacity:1;transform:none;}
+.heading{margin-top:14px;font-size:34px;line-height:44px;font-weight:600;letter-spacing:-0.6px;width:520px;max-width:100%;}
+
+/* Bloco de depoimentos: container próprio, mais estreito que a viewport e
+   centralizado (margin-inline:auto); cada linha é seu próprio flex row com
+   justify-content:center, então uma linha com menos cards fica centrada
+   por conta própria em vez de nascer colada na borda esquerda da linha de
+   cima. */
+.grid{
+  max-width:1180px;margin:clamp(48px,5vw,64px) auto 0;padding-inline:var(--gutter);
+  width:100%;
+  display:flex;flex-direction:column;align-items:center;gap:20px;
+}
+.row{
+  width:100%;
+  display:flex;flex-wrap:nowrap;justify-content:center;align-items:stretch;gap:20px;
+}
+
+.card{
+  flex:0 0 320px;width:320px;
+  background:var(--white);border-radius:var(--r-lg);padding:28px 26px;
+  display:flex;flex-direction:column;gap:16px;
+}
+.author{display:flex;align-items:center;gap:12px;}
+.avatar{width:40px;height:40px;border-radius:50%;object-fit:cover;}
+.name{font-size:14.5px;font-weight:600;color:var(--ink);}
+.quote{
+  margin:0;
+  font-family:var(--font-head);font-weight:500;font-size:15.5px;line-height:23px;color:var(--muted);
+  display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;
+}
+
+@media (max-width:1023px){
+  .heading{font-size:28px;line-height:36px;}
+  .row{flex-wrap:wrap;}
+  .card{flex-basis:280px;width:280px;padding:24px 22px;}
+  .quote{font-size:15px;line-height:22px;}
+}
+@media (max-width:767px){
+  .grid{margin-top:40px;gap:16px;}
+  .row{flex-direction:column;align-items:center;}
+  .card{flex-basis:auto;width:100%;max-width:340px;padding:20px 18px;}
+}

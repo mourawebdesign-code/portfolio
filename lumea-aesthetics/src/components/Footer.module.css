@@ -1,0 +1,84 @@
+/* Footer editorial premium — referência AURA: container bem mais largo que
+   o resto do site (--container global não é tocado, fica isolado aqui),
+   com bastante respiro vertical. */
+.footer{background:var(--page);padding-top:calc(var(--section-space) / 2);}
+.inner{max-width:1480px;margin-inline:auto;padding-inline:clamp(20px,6vw,96px);}
+
+.top{
+  display:flex;flex-wrap:wrap;justify-content:space-between;gap:56px 64px;
+}
+.navGroup{display:flex;flex-wrap:wrap;gap:56px 64px;}
+
+/* Reveal progressivo: marca primeiro, colunas em seguida com stagger.
+   O wordmark é só opacity (sem transform) — permanece discreto, não
+   "desliza" pela tela. */
+.brand,.col{
+  opacity:0;transform:translateY(18px);
+  transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1);
+}
+.col{transition-delay:calc(var(--i) * 90ms);}
+.visible.top .brand,.visible.top .col{opacity:1;transform:none;}
+
+.brand{flex:1 1 320px;max-width:400px;}
+.logo{height:46px;width:92px;object-fit:contain;object-position:left center;}
+.headline{
+  margin-top:28px;
+  font-family:var(--font-head);font-weight:600;
+  font-size:28px;line-height:34px;letter-spacing:-0.4px;color:var(--ink);
+}
+.headlineAccent{color:var(--violet);}
+.address{
+  margin-top:20px;font-size:15px;line-height:24px;letter-spacing:-0.28px;
+  color:var(--muted);white-space:pre-line;
+}
+
+.col{flex:0 0 auto;min-width:150px;}
+.colHeading{
+  font-family:var(--font-head);font-weight:600;
+  font-size:18px;line-height:24px;letter-spacing:-0.3px;color:var(--ink);
+}
+.colLinks{margin-top:20px;display:flex;flex-direction:column;gap:14px;}
+.link{
+  width:fit-content;
+  font-size:15px;line-height:22px;letter-spacing:-0.2px;color:var(--muted);
+  transition:color .22s ease;
+}
+.link:hover{color:var(--violet);}
+
+.divider{
+  margin-top:clamp(40px,6vw,72px);
+  height:1px;background:var(--line);
+}
+
+.bottom{
+  padding-block:28px;
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 20px;
+}
+.copy{font-size:13px;line-height:20px;color:var(--muted);}
+.legal{display:flex;flex-wrap:wrap;align-items:center;}
+.legalItem{display:inline-flex;align-items:center;}
+.dot{margin:0 10px;color:var(--muted-2);}
+.legalLink{font-size:13px;line-height:20px;color:var(--muted);transition:color .22s ease;}
+.legalLink:hover{color:var(--violet);}
+
+@media (max-width:1279px){
+  /* marca em linha própria (largura cheia) e o grupo de navegação reflui
+     por conta própria logo abaixo — evita que a última coluna (Contato)
+     fique sozinha numa 2ª linha por falta de espaço ao lado das outras
+     duas, já que agora ela não compete com a marca pela mesma linha. */
+  .headline{font-size:26px;line-height:32px;}
+  .top{gap:36px 40px;}
+  .brand{flex-basis:100%;max-width:440px;}
+  .col{min-width:130px;}
+}
+@media (max-width:1023px){
+  .col{min-width:120px;}
+}
+@media (max-width:767px){
+  .top{flex-direction:column;gap:36px;}
+  .navGroup{gap:32px 40px;}
+  .brand{max-width:100%;}
+  .headline{font-size:24px;line-height:30px;}
+  .col{min-width:0;}
+  .bottom{flex-direction:column;align-items:flex-start;gap:10px;padding-block:24px;}
+}

@@ -1,0 +1,84 @@
+.compare {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  touch-action: pan-y;
+  cursor: ew-resize;
+  user-select: none;
+}
+.img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+}
+.beforeLayer {
+  position: absolute;
+  inset: 0;
+  will-change: clip-path;
+}
+
+/* Direção de arte, não badge: só letras pequenas com blur discreto atrás,
+   sem pílula colorida chapada. */
+.tag {
+  position: absolute;
+  top: 16px;
+  z-index: 3;
+  padding: 6px 10px;
+  border-radius: 4px;
+  background: rgba(20, 18, 65, 0.22);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+.tagBefore { left: 16px; }
+.tagAfter { right: 16px; }
+
+.handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.85);
+  z-index: 4;
+  transform: translateX(-0.5px);
+  pointer-events: none;
+}
+/* Cápsula vertical minimalista, não um botão circular genérico. */
+.knob {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 44px;
+  border-radius: var(--r-pill);
+  background: #fff;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  box-shadow: 0 2px 10px rgba(20, 18, 65, 0.22);
+  cursor: grab;
+  pointer-events: auto;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.knob:hover { box-shadow: 0 4px 16px rgba(20, 18, 65, 0.3); }
+.knob:active { cursor: grabbing; transform: translate(-50%, -50%) scale(0.94); }
+.knob:focus-visible { outline: 2px solid var(--violet); outline-offset: 3px; }
+.knob svg { width: 11px; height: 11px; }
+
+@media (max-width: 767px) {
+  .knob { width: 32px; height: 46px; }
+}

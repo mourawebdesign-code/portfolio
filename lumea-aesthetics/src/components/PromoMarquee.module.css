@@ -1,0 +1,52 @@
+/* Faixa = assinatura gráfica horizontal no final da hero. Sem rotação, sem
+   skew, sem clip-path, sem margem compensatória: fica em fluxo normal,
+   logo depois da Hero — a foto termina, a faixa começa, sem gap. */
+.wrap{
+  position:relative;
+  overflow:hidden;
+}
+.band{
+  height:60px;
+  background:var(--mauve);
+  display:flex;align-items:center;
+}
+.track{
+  display:flex;width:max-content;
+  animation:scroll 30s linear infinite;
+}
+.wrap:hover .track{animation-play-state:paused;}
+/* -100%/n do TRACK == -100% de UM .group, sempre — não importa quantas
+   cópias (n) estejam renderizadas, porque é uma fração da largura da
+   PRÓPRIA track (n grupos idênticos lado a lado), nunca um px calculado
+   à parte. --n vem do PromoMarquee.tsx (ResizeObserver mede quantas
+   cópias cabem pra nunca faltar conteúdo à frente da viewport). O frame
+   final fica pixel-a-pixel igual ao inicial (grupo seguinte assume a
+   posição exata em que o primeiro começou), então o loop reinicia sem
+   salto — em qualquer largura, sem depender de só 2 cópias bastarem. */
+@keyframes scroll{
+  from{transform:translate3d(0,0,0);}
+  to{transform:translate3d(calc(-100% / var(--n, 2)),0,0);}
+}
+.group{display:flex;align-items:center;flex-shrink:0;}
+.item{display:inline-flex;align-items:center;gap:20px;padding-inline:24px;flex:0 0 auto;white-space:nowrap;}
+.star{width:12px;height:12px;flex:0 0 auto;color:rgba(255,255,255,.55);}
+.text{
+  font-family:var(--font-body);
+  font-size:14px;font-weight:700;line-height:1;
+  letter-spacing:0.03em;text-transform:uppercase;color:#fff;white-space:nowrap;
+}
+@media (max-width:1023px){
+  .band{height:54px;}
+  .track{animation-duration:28s;}
+  .text{font-size:13.5px;}
+  .star{width:11px;height:11px;}
+  .item{gap:18px;padding-inline:20px;}
+}
+@media (max-width:767px){
+  .band{height:46px;}
+  .track{animation-duration:24s;}
+  .text{font-size:13px;}
+  .star{width:10px;height:10px;}
+  .item{gap:14px;padding-inline:16px;}
+}
+@media (prefers-reduced-motion:reduce){.track{animation:none;}}

@@ -1,0 +1,145 @@
+/* ============ DESIGN TOKENS (extraídos da referência) ============ */
+:root{
+  /* cores */
+  --violet:#736ed5;
+  --violet-ink:#5f59c4;
+  --ink:#141241;
+  --mauve:#906787;
+  --page:#f5f4fb;
+  --line:#e0dff0;
+  --muted:#8482ab;
+  --muted-2:#bab8d6;
+  --white:#fff;
+  --white-70:#ffffffb3;
+  --white-20:#fff3;
+  /* Tint claro derivado de --violet (mesma família, não uma cor nova) —
+     usado só como destaque pontual sobre foto escura (ex.: Hero). */
+  --lavender:#b4b0ff;
+
+  /* layout */
+  --container:1120px;
+  --gutter:40px;
+  /* Ritmo vertical único entre as seções principais da página — cada
+     section usa calc(var(--section-space)/2) no padding-top E no
+     padding-bottom, então a distância visual entre duas seções vizinhas é
+     sempre --section-space (metade + metade), nunca a soma de dois valores
+     arbitrários diferentes. Hero, PromoMarquee e os banners (Rupture,
+     VisitCta) têm composição própria — usam esse mesmo token só no espaço
+     externo (antes/depois), nunca no miolo já aprovado deles. */
+  --section-space:112px;
+
+  /* raios */
+  --r-sm:8px;
+  --r-md:16px;
+  --r-lg:24px;
+  --r-pill:999px;
+
+  /* tipografia */
+  --font-head:var(--font-nunito), "Nunito Placeholder", sans-serif;
+  --font-body:var(--font-nunito-sans), "Nunito Sans Placeholder", sans-serif;
+  /* Grotesk editorial (Inter Tight, var(--font-display) vem do next/font em
+     layout.tsx) — só na Hero (ver Hero.module.css/Navbar.module.css). */
+  --font-grotesk:var(--font-display, "Inter Tight Placeholder"), "Inter Tight Placeholder", sans-serif;
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--white);
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-size:16px;
+  line-height:24px;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;}
+h1,h2,h3,h4,p{margin:0;}
+ul{margin:0;padding:0;list-style:none;}
+
+/* ============ PRIMITIVAS ============ */
+.container{
+  width:100%;
+  max-width:var(--container);
+  margin-inline:auto;
+  padding-inline:0;
+}
+.page-pad{padding-inline:var(--gutter);}
+
+h1,.h1{
+  font-family:var(--font-head);
+  font-weight:700;
+  font-size:64px;
+  line-height:64px;
+  letter-spacing:-0.02em;
+  color:var(--ink);
+}
+h2,.h2{
+  font-family:var(--font-head);
+  font-weight:600;
+  font-size:40px;
+  line-height:52px;
+  letter-spacing:-0.02em;
+  color:var(--ink);
+}
+.eyebrow{
+  font-family:var(--font-body);
+  font-weight:700;
+  font-size:13px;
+  line-height:16px;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--violet);
+}
+.body-lg{font-size:17px;line-height:27px;color:var(--muted);}
+.body{font-size:16px;line-height:26px;color:var(--muted);}
+
+/* botões */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  height:50px;padding-inline:26px;
+  border-radius:var(--r-pill);
+  font-family:var(--font-body);
+  font-weight:700;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;
+  transition:background-color .25s ease,color .25s ease,transform .25s ease,opacity .25s ease;
+  will-change:transform;
+}
+.btn-primary{background:var(--violet);color:var(--white);}
+.btn-primary:hover{background:var(--violet-ink);transform:translateY(-2px);}
+.btn-ghost{
+  height:auto;padding:0;border-radius:0;background:none;color:var(--ink);
+  text-transform:none;letter-spacing:0;font-size:16px;font-weight:600;
+  border-bottom:1px solid var(--ink);padding-bottom:2px;
+}
+.btn-ghost:hover{opacity:.6;}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important;}
+}
+
+/* Progressive enhancement: todo elemento com reveal-on-scroll carrega
+   data-reveal além da sua classe normal. O <noscript> em layout.tsx força
+   esses elementos visíveis quando o JavaScript está desabilitado (React
+   nunca hidrata, o observer nunca dispara) — nunca deve ficar preso em
+   opacity:0. Ver também o fallback por timeout em useReveal.ts para quando
+   o JS roda mas o observer falha por algum outro motivo. */
+
+/* ============ BREAKPOINTS ============ */
+@media (max-width:1279px){
+  :root{--container:960px;--gutter:32px;--section-space:96px;}
+  h1,.h1{font-size:56px;line-height:58px;}
+}
+@media (max-width:1023px){
+  :root{--container:100%;--gutter:28px;--section-space:88px;}
+  h1,.h1{font-size:48px;line-height:50px;}
+  h2,.h2{font-size:34px;line-height:44px;}
+}
+@media (max-width:767px){
+  :root{--gutter:20px;--section-space:64px;}
+  h1,.h1{font-size:40px;line-height:42px;}
+  h2,.h2{font-size:28px;line-height:36px;}
+  .body-lg{font-size:16px;line-height:26px;}
+}

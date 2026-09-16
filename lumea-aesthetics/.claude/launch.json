@@ -1,0 +1,7 @@
+{
+  "version": "0.0.1",
+  "autoPort": true,
+  "configurations": [
+    { "name": "zental", "runtimeExecutable": "npm", "runtimeArgs": ["run", "dev"], "autoPort": true }
+  ]
+}
